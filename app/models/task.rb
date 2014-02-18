@@ -4,7 +4,8 @@ class Task < ActiveRecord::Base
   has_paper_trail
 
   # Associations
-  belongs_to :user
+  belongs_to :user, inverse_of: :tasks
+  has_many :check_ins, dependent: :destroy, inverse_of: :task
 
   # Mixins
   enumerize :border_color,

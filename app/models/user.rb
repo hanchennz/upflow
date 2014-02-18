@@ -10,4 +10,8 @@ class User < ActiveRecord::Base
          :rememberable,
          :trackable,
          :validatable
+
+  # Associations
+  has_many :check_ins, dependent: :destroy, inverse_of: :user
+  has_many :tasks, dependent: :destroy, inverse_of: :user
 end
