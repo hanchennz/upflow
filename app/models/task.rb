@@ -1,5 +1,7 @@
 class Task < ActiveRecord::Base
   extend Enumerize
+  acts_as_paranoid
+  has_paper_trail
 
   # Associations
   belongs_to :user
