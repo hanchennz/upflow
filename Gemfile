@@ -46,5 +46,7 @@ end
 
 gem 'devise'
 gem 'enumerize'
+gem 'oj'
 gem 'paper_trail', '~> 3.0.0'
 gem 'paranoia', '~> 2.0'
+gem 'rabl'
