@@ -44,6 +44,15 @@ end
 # Use debugger
 # gem 'debugger', group: [:development, :test]
 
+group :development, :test do
+  gem 'coffeelint'
+  gem 'factory_girl_rails'
+  gem 'faker'
+  gem 'pry'
+  gem 'rspec-rails'
+  gem 'rubocop'
+end
+
 gem 'devise'
 gem 'enumerize'
 gem 'oj'
