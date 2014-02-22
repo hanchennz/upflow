@@ -1,5 +1,6 @@
 @upflow = angular.module('upflow', [
-  'ngRoute'
+  'ngRoute',
+  'ui.bootstrap'
 ])
 
 @upflow.config ($routeProvider) ->
