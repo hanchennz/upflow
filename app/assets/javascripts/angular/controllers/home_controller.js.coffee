@@ -1,0 +1,1 @@
+@upflow.controller 'HomeController', ($scope) ->

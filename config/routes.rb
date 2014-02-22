@@ -1,5 +1,5 @@
 Upflow::Application.routes.draw do
-  root to: 'home#index'
+  root to: 'static_pages#index'
 
   devise_for :users
 
