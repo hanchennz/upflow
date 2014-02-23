@@ -1,0 +1,12 @@
+DOCTYPE html
+html ng-app="upflow"
+  head
+    title Upflow
+    = stylesheet_link_tag 'application'
+    = javascript_include_tag 'application'
+    = csrf_meta_tags
+  body
+    header.mastheader ng-include="'#{asset_path('master/_header.html')}'"
+    div#content.selected.container ng-view="" autoscroll="true"
+    / footer.footer ng-include="'#{asset_path('master/footer.html')}'"
+    footer.mastfooter ng-include="'#{asset_path('master/_footer.html')}'"

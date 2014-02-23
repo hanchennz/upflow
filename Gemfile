@@ -53,7 +53,7 @@ group :development, :test do
   gem 'rubocop'
 end
 
-gem 'bootstrap-sass'
+gem 'bootstrap-sass', '~> 3.1.1'
 gem 'devise'
 gem 'enumerize'
 gem 'oj'
