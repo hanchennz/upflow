@@ -3,8 +3,11 @@
   'ui.bootstrap'
 ])
 
-@upflow.config ($routeProvider) ->
+@upflow.config ($routeProvider, $locationProvider) ->
+  $locationProvider.html5Mode true
+
   $routeProvider
-    .otherwise
+    .when '/',
       controller: 'HomeController'
       templateUrl: '../assets/home.html'
+    .otherwise redirectTo: '/'

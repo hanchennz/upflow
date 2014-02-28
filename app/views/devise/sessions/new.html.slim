@@ -1,0 +1,18 @@
+div
+  header.section-header
+    h1 = t('.title')
+  div
+    = form_for resource, as: resource_name, url: session_path(resource_name) do |f|
+      fieldset
+        div
+          = f.label :email
+        div
+          = f.email_field :email
+        div
+          = f.label :password
+        div
+          = f.password_field :password
+        div
+          = f.button t('.submit')
+  section
+    = link_to t('.forgot_password'), new_user_password_path(resource)

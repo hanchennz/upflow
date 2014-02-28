@@ -1,7 +1,17 @@
 Upflow::Application.routes.draw do
-  root 'static_pages#index'
+  root to: 'static_pages#index'
 
   devise_for :users
+
+  namespace :api do
+    resources :users, only: %i(destroy index show update) do
+      collection do
+        get 'current'
+      end
+    end
+  end
+
+  get '*path' => 'static_pages#index'
 
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
