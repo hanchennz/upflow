@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140218033357) do
+ActiveRecord::Schema.define(version: 20140302220358) do
 
   create_table "check_ins", force: true do |t|
     t.integer  "task_id",    null: false
@@ -31,7 +31,7 @@ ActiveRecord::Schema.define(version: 20140218033357) do
     t.string   "border_color", null: false
     t.string   "color",        null: false
     t.string   "name",         null: false
-    t.string   "type",         null: false
+    t.string   "task_type",    null: false
     t.text     "description",  null: false
     t.datetime "created_at",   null: false
     t.datetime "updated_at",   null: false

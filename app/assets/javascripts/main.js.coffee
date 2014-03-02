@@ -1,4 +1,5 @@
 @upflow = angular.module('upflow', [
+  'ngResource',
   'ngRoute',
   'ui.bootstrap'
 ])

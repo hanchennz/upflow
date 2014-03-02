@@ -1,2 +1,8 @@
-Div
+div
   | This is the Landing Page Template.
+  div
+    | {{currentUser.email}}
+  div
+    | {{currentUser.id}}
+div ng-repeat="task in tasksList"
+  | {{task.name}} - {{task.color}} - {{task.description}}

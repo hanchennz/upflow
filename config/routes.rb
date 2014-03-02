@@ -4,9 +4,15 @@ Upflow::Application.routes.draw do
   devise_for :users
 
   namespace :api do
-    resources :users, only: %i(destroy index show update) do
+    resources :tasks, only: %i(destroy show update) do
+    end
+
+    resources :users, only: [] do
       collection do
         get 'current'
+      end
+
+      resources :tasks, only: %i(create index) do
       end
     end
   end

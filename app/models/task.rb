@@ -18,11 +18,11 @@ class Task < ActiveRecord::Base
             in: %i(red orange yellow green blue),
             scope: true,
             predicates: true
-  enumerize :type, in: %i(one_off repeating), scope: true, predicates: true
+  enumerize :task_type, in: %i(one_off repeating), scope: true, predicates: true
 
   # Validations
   validates :border_color, presence: true
   validates :color, presence: true
   validates :name, presence: true
-  validates :type, presence: true
+  validates :task_type, presence: true
 end
