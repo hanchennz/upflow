@@ -4,12 +4,13 @@ div
     | {{currentUser.email}}
   div
     | {{currentUser.id}}
-div ng-repeat="task in tasksList"
+div ng-repeat="task in taskList"
   | {{task.name}} - {{task.color}} - {{task.description}}
+  button.btn-warning type="button" ng-click="deleteTask(task)" DELETE
 div
-  button ng-click="new_task_form()" Add New Task
-div ng-repeat="newTask in newTasksList"
-  form ng-submit="save_task(newTask)"
+  button ng-click="newTaskForm()" Add New Task
+div ng-repeat="newTask in newTaskList"
+  form ng-submit="saveTask(newTask)"
     div
       label Name
       input ng-model="newTask.name"
