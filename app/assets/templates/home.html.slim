@@ -6,3 +6,20 @@ div
     | {{currentUser.id}}
 div ng-repeat="task in tasksList"
   | {{task.name}} - {{task.color}} - {{task.description}}
+div
+  button ng-click="new_task_form()" Add New Task
+div ng-repeat="newTask in newTasksList"
+  form ng-submit="save_task(newTask)"
+    div
+      label Name
+      input ng-model="newTask.name"
+    div
+      label Type
+      input ng-model="newTask.task_type"
+    div
+      label Due Date
+      input type="date" ng-model="newTask.due_at"
+    div
+      label Description
+      textarea ng-model="newTask.description"
+    button type="submit" Save Task
