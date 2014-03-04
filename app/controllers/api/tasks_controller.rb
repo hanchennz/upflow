@@ -1,9 +1,4 @@
 class Api::TasksController < ApplicationController
-  def index
-    @user = User.find(params[:user_id])
-    @tasks = @user.tasks
-  end
-
   def create
     @task = Task.new(permitted_params)
     if @task.save
@@ -20,6 +15,11 @@ class Api::TasksController < ApplicationController
     else
       render_validation_errors @task
     end
+  end
+
+  def index
+    @user = User.find(params[:user_id])
+    @tasks = @user.tasks
   end
 
   def show

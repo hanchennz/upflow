@@ -4,7 +4,10 @@ Upflow::Application.routes.draw do
   devise_for :users
 
   namespace :api do
+    resources :check_ins, only: %i(destroy update)
+
     resources :tasks, only: %i(destroy show update) do
+      resources :check_ins, only: %i(create index)
     end
 
     resources :users, only: [] do
@@ -12,8 +15,9 @@ Upflow::Application.routes.draw do
         get 'current'
       end
 
-      resources :tasks, only: %i(create index) do
-      end
+      resources :tasks, only: %i(create index)
+
+      get :user_check_ins, on: :member, controller: :check_ins
     end
   end
 
