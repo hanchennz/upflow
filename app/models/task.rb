@@ -23,6 +23,12 @@ class Task < ActiveRecord::Base
   # Validations
   validates :border_color, presence: true
   validates :color, presence: true
-  validates :name, presence: true
+  validates :description, length: { maximum: 2000 }
+  validates :name, length: 1..50
   validates :task_type, presence: true
+
+  # def update_colors
+  #   if @user 
+  #   self
+  # end
 end
