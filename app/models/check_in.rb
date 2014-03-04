@@ -4,7 +4,7 @@ class CheckIn < ActiveRecord::Base
 
   # Associations
   belongs_to :task, inverse_of: :check_ins
-  belongs_to :user, inverse_of: :check_ins
+  has_one :user, through: :task
 
   # Validations
   validates :note, presence: true

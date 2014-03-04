@@ -1,4 +1,9 @@
 FactoryGirl.define do
+  factory :check_in do
+    task
+    note { Faker::Lorem.sentence(1) }
+  end
+
   factory :user do
     ignore do
       count { User.count + 1 }

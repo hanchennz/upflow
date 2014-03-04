@@ -12,6 +12,6 @@ class User < ActiveRecord::Base
          :validatable
 
   # Associations
-  has_many :check_ins, dependent: :destroy, inverse_of: :user
-  has_many :tasks, dependent: :destroy, inverse_of: :user
+  has_many :check_ins, through: :tasks, dependent: :destroy
+  has_many :tasks, dependent: :destroy
 end

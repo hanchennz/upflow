@@ -1,8 +1,9 @@
-@upflow.controller 'HomeController', ($scope, Session, Task) ->
+@upflow.controller 'HomeController', ($scope, CheckIn, Session, Task) ->
 
   Session.getUser (user) ->
     $scope.currentUser = user
     $scope.taskList = Task.index(user_id: user.id)
+    $scope.checkInList = CheckIn.user_check_ins(user_id: user.id)
 
   $scope.newTaskForm = ->
     $scope.newTaskList ?= []

@@ -1,33 +1,38 @@
-div
+div.row
   | This is the Landing Page Template.
   div
     | {{currentUser.email}}
   div
     | {{currentUser.id}}
-div ng-repeat="task in taskList"
-  div ng-if="!task.editMode"
-    | {{task.name}} - {{task.task_type}} - {{task.description}}
-    button type="button" ng-click="toggleTaskEditMode(task)" Edit Task
-  div ng-if="task.editMode"
-    input ng-model="task.name"
-    input ng-model="task.task_type"
-    input ng-model="task.description"
-    button type="button" ng-click="updateTask(task)" Save Task
-    button.btn-warning type="button" ng-click="deleteTask(task)" DELETE
-div
-  button ng-click="newTaskForm()" Add New Task
-div ng-repeat="newTask in newTaskList"
-  form ng-submit="saveTask(newTask)"
+div.row
+  div.col-md-4
+    div ng-repeat="task in taskList"
+      div ng-if="!task.editMode"
+        | {{task.name}} - {{task.task_type}} - {{task.description}}
+        button type="button" ng-click="toggleTaskEditMode(task)" Edit Task
+      div ng-if="task.editMode"
+        input ng-model="task.name"
+        input ng-model="task.task_type"
+        input ng-model="task.description"
+        button type="button" ng-click="updateTask(task)" Save Task
+        button.btn-warning type="button" ng-click="deleteTask(task)" DELETE
     div
-      label Name
-      input ng-model="newTask.name"
-    div
-      label Type
-      input ng-model="newTask.task_type"
-    div
-      label Due Date
-      input type="date" ng-model="newTask.due_at"
-    div
-      label Description
-      textarea ng-model="newTask.description"
-    button type="submit" Save Task
+      button ng-click="newTaskForm()" Add New Task
+    div ng-repeat="newTask in newTaskList"
+      form ng-submit="saveTask(newTask)"
+        div
+          label Name
+          input ng-model="newTask.name"
+        div
+          label Type
+          input ng-model="newTask.task_type"
+        div
+          label Due Date
+          input type="date" ng-model="newTask.due_at"
+        div
+          label Description
+          textarea ng-model="newTask.description"
+        button type="submit" Save Task
+  div.col-md-8
+    div ng-repeat="checkIn in checkInList"
+      | {{checkIn.note}}

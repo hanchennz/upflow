@@ -17,7 +17,7 @@ Upflow::Application.routes.draw do
 
       resources :tasks, only: %i(create index)
 
-      get :user_check_ins, on: :member, controller: :check_ins
+      get :user_check_ins, controller: :check_ins
     end
   end
 

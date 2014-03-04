@@ -32,6 +32,7 @@ class Api::CheckInsController < ApplicationController
 
   def user_check_ins
     @check_ins = User.find(params[:user_id]).check_ins
+    render 'index'
   end
 
   private
