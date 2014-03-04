@@ -27,3 +27,15 @@
       console.log('Task was successfully deleted')
     , (error) ->
       console.log('There was an error in delete the task')
+
+  $scope.toggleTaskEditMode = (task) ->
+    task.editMode ?= false
+    task.editMode = !task.editMode
+
+  $scope.updateTask = (task) ->
+    Task.update { task: task, id: task.id }
+    , (success) ->
+      $scope.toggleTaskEditMode(task)
+      console.log('The task was successfully updated')
+    , (error) ->
+      console.log('There was an error in updating the task')

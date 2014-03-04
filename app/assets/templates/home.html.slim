@@ -5,8 +5,15 @@ div
   div
     | {{currentUser.id}}
 div ng-repeat="task in taskList"
-  | {{task.name}} - {{task.color}} - {{task.description}}
-  button.btn-warning type="button" ng-click="deleteTask(task)" DELETE
+  div ng-if="!task.editMode"
+    | {{task.name}} - {{task.task_type}} - {{task.description}}
+    button type="button" ng-click="toggleTaskEditMode(task)" Edit Task
+  div ng-if="task.editMode"
+    input ng-model="task.name"
+    input ng-model="task.task_type"
+    input ng-model="task.description"
+    button type="button" ng-click="updateTask(task)" Save Task
+    button.btn-warning type="button" ng-click="deleteTask(task)" DELETE
 div
   button ng-click="newTaskForm()" Add New Task
 div ng-repeat="newTask in newTaskList"
