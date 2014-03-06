@@ -13,14 +13,14 @@
       method: 'POST',
       url: '/api/tasks/:task_id/check_ins.json'
     },
-    index: {
+    query: {
       method: 'GET',
       isArray: true,
       url: '/api/tasks/:task_id/check_ins.json'
     },
-    user_check_ins: {
+    queryUser: {
       method: 'GET',
       isArray: true,
-      url: '/api/users/:user_id/user_check_ins.json'
+      url: '/api/users/:user_id/check_ins.json'
     }
   )

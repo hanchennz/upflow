@@ -9,15 +9,18 @@ div.row
     div ng-repeat="task in taskList"
       div ng-if="!task.editMode"
         | {{task.name}} - {{task.task_type}} - {{task.description}}
-        button type="button" ng-click="toggleTaskEditMode(task)" Edit Task
+        button.btn.btn-default type="button" ng-click="toggleEditMode(task)" Edit Task
+        button.btn.btn-primary type="button" ng-click="newCheckInForTask(task)" Check In
       div ng-if="task.editMode"
-        input ng-model="task.name"
-        input ng-model="task.task_type"
-        input ng-model="task.description"
-        button type="button" ng-click="updateTask(task)" Save Task
-        button.btn-warning type="button" ng-click="deleteTask(task)" DELETE
+        form ng-submit="updateTask(task)"
+          input ng-model="task.name"
+          input ng-model="task.task_type"
+          input ng-model="task.description"
+          button.btn.btn-success type="submit" Save Task
+          button.btn.btn-danger type="button" ng-click="deleteTask(task)" DELETE
+          button.btn.btn-warning type="button" ng-click="toggleEditMode(task)" Cancel
     div
-      button ng-click="newTaskForm()" Add New Task
+      button.btn.btn-primary ng-click="newTaskForm()" Add New Task
     div ng-repeat="newTask in newTaskList"
       form ng-submit="saveTask(newTask)"
         div
@@ -32,7 +35,25 @@ div.row
         div
           label Description
           textarea ng-model="newTask.description"
-        button type="submit" Save Task
+        button.btn.btn-success type="submit" Save Task
+        button.btn.btn-warning type="button" Cancel ng-click="removeUnsavedTask(newTask)"
   div.col-md-8
+    div ng-repeat="newCheckIn in newCheckInList"
+      form ng-submit="saveCheckIn(newCheckIn)"
+        | New Check In for {{newCheckIn.task_name}}
+        input ng-model="newCheckIn.note"
+        button.btn.btn-success type="submit" Save
+        button.btn.btn-warning type="button" ng-click="removeUnsavedCheckIn(newCheckIn)" Cancel
     div ng-repeat="checkIn in checkInList"
-      | {{checkIn.note}}
+      div ng-if="!checkIn.editMode"
+        | {{checkIn.id}} - {{checkIn.note}}
+        button.btn.btn-default type="button" ng-click="toggleEditMode(checkIn)" Edit 
+      div ng-if="checkIn.editMode"
+        form ng-submit="updateCheckIn(checkIn)"
+          input ng-model="checkIn.note"
+          button.btn.btn-success type="submit" Save
+          button.btn.btn-danger type="button" ng-click="deleteCheckIn(checkIn)" DELETE
+          button.btn.btn-warning type="button" ng-click="toggleEditMode(checkIn)" Cancel
+
+
+

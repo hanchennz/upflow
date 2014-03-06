@@ -18,7 +18,11 @@ class Api::CheckInsController < ApplicationController
   end
 
   def index
-    @check_ins = Task.find(params[:task_id]).check_ins
+    if params[:task_id]
+      @check_ins = Task.find(params[:task_id]).check_ins
+    elsif params[:user_id]
+      @check_ins = User.find(params[:user_id]).check_ins
+    end
   end
 
   def update
@@ -28,11 +32,6 @@ class Api::CheckInsController < ApplicationController
     else
       render_validation_errors @task
     end
-  end
-
-  def user_check_ins
-    @check_ins = User.find(params[:user_id]).check_ins
-    render 'index'
   end
 
   private

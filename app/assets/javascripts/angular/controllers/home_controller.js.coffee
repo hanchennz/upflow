@@ -3,7 +3,11 @@
   Session.getUser (user) ->
     $scope.currentUser = user
     $scope.taskList = Task.index(user_id: user.id)
-    $scope.checkInList = CheckIn.user_check_ins(user_id: user.id)
+    $scope.checkInList = CheckIn.queryUser(user_id: user.id)
+
+  $scope.toggleEditMode = (object) ->
+    object.editMode ?= false
+    object.editMode = !object.editMode
 
   $scope.newTaskForm = ->
     $scope.newTaskList ?= []
@@ -11,6 +15,9 @@
       task_type: 'one_off'
       user_id: $scope.currentUser.id
     })
+
+  $scope.removeUnsavedTask = (task) ->
+    $scope.newTaskList = _.without($scope.newTaskList, task)
 
   $scope.saveTask = (task) ->
     Task.save { task: task, user_id: $scope.currentUser.id }
@@ -29,14 +36,55 @@
     , (error) ->
       console.log('There was an error in delete the task')
 
-  $scope.toggleTaskEditMode = (task) ->
-    task.editMode ?= false
-    task.editMode = !task.editMode
-
   $scope.updateTask = (task) ->
     Task.update { task: task, id: task.id }
     , (success) ->
-      $scope.toggleTaskEditMode(task)
+      $scope.toggleEditMode(task)
       console.log('The task was successfully updated')
     , (error) ->
       console.log('There was an error in updating the task')
+
+  $scope.newCheckInForTask = (task) ->
+    $scope.newCheckInList ?= []
+    $scope.newCheckInList.push({
+      task_id: task.id
+      task_name: task.name
+    })
+
+  $scope.removeUnsavedCheckIn = (checkIn) ->
+    $scope.newCheckInList = _.without($scope.newCheckInList, checkIn)
+
+  $scope.saveCheckIn = (checkIn) ->
+    CheckIn.save { check_in: checkIn, task_id: checkIn.task_id }
+    , (savedCheckIn) ->
+      $scope.checkInList.push(savedCheckIn)
+      $scope.newCheckInList = _.without($scope.newCheckInList, checkIn)
+    , (error) ->
+      console.log('Error in saving check in')
+      console.log(error)
+
+  $scope.deleteCheckIn = (checkIn) ->
+    CheckIn.delete { id: checkIn.id }
+    , (success) ->
+      $scope.checkInList = _.without($scope.checkInList, checkIn)
+      console.log('checkIn was successfully deleted')
+    , (error) ->
+      console.log('There was an error in delete the checkIn')
+
+  $scope.updateCheckIn = (checkIn) ->
+    CheckIn.update { check_in: checkIn, id: checkIn.id }
+    , (success) ->
+      $scope.toggleEditMode(checkIn)
+      console.log('The check in was successfully updated')
+    , (error) ->
+      console.log('There was an error in updating the check in')
+
+
+
+
+
+
+
+
+
+
