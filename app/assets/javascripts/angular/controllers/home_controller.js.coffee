@@ -5,6 +5,10 @@
     $scope.taskList = Task.index(user_id: user.id)
     $scope.checkInList = CheckIn.queryUser(user_id: user.id)
 
+  $scope.toggleDisplay = (task) ->
+    task.display ?= false
+    task.display = !task.display
+
   $scope.toggleEditMode = (object) ->
     object.editMode ?= false
     object.editMode = !object.editMode

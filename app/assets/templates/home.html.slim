@@ -6,15 +6,15 @@ div.row
     | {{currentUser.id}}
 div.row
   div.col-md-4
-    div.task ng-repeat="task in taskList"
+    div.task ng-repeat="task in taskList" ng-click="toggleDisplay(task)"
       div.row.header ng-if="!task.editMode"
-        div.col-xs-10.vertical-parent
-          h5.vertical-centered
+        div.col-xs-10.vertical-parent ng-class="{'highlight': task.display}"
+          h4.vertical-centered
             | {{task.name}}
         span.glyphicon.glyphicon-chevron-right.col-xs-2 ng-click="newCheckInForTask(task)"
-      div.body.row ng-if="!task.editMode && task.show"
-        div.body.col-xs-10
-          div.content
+      div.body.row.slide ng-if="!task.editMode && task.display"
+        div.content.col-xs-10
+          div.text
             | {{task.task_type}} - {{task.description}}
           div.footer
             | Footer
