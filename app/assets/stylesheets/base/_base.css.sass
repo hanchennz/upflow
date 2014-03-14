@@ -1,0 +1,61 @@
+@import "variables"
+
+.green
+  background-color: $green
+
+.blue
+  background-color: $blue
+
+div.task
+  background-color: $darker-green
+  margin: 1rem
+  padding-left: 1rem
+
+  .row
+    margin: 0
+
+  .header
+    position: relative
+    min-height: 4rem
+
+    div
+      background-color: $green
+      position: absolute
+      top: 0
+      left: 0
+      height: 100%
+
+      h5
+        margin: 0
+        color: white
+
+    span
+      position: absolute
+      right: 0
+      top: 0
+      height: 100%
+
+  .glyphicon
+    font-size: 2.4rem
+    color: white
+
+    &:before
+      position: absolute
+      top: 18%
+      right: 25%
+
+    &:hover
+      color: $green
+      cursor: pointer
+      transition: .1s linear
+
+.vertical-parent:before
+  content: ''
+  display: inline-block
+  height: 100%
+  vertical-align: middle
+  margin-right: -0.25rem
+
+.vertical-centered
+  display: inline-block
+  vertical-align: middle
