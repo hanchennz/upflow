@@ -4,14 +4,20 @@
     $scope.currentUser = user
     $scope.taskList = Task.index(user_id: user.id)
     $scope.checkInList = CheckIn.queryUser(user_id: user.id)
+    $scope.search = {}
 
   $scope.toggleDisplay = (task) ->
-    task.display ?= false
-    task.display = !task.display
+    $scope.displayedTask = if $scope.displayedTask == task then undefined else task
+    $scope.search.task_id = if $scope.search.task_id == task.id then undefined else task.id
+
+  $scope.displayed = (task) -> $scope.displayedTask == task if $scope.displayedTask
 
   $scope.toggleEditMode = (object) ->
-    object.editMode ?= false
-    object.editMode = !object.editMode
+    object.editMode = if object.editMode? then !object.editMode else true
+
+  $scope.toggleXEditMode = (form) -> form.$show()
+
+  $scope.xEditMode = (form) -> form.$visible
 
   $scope.newTaskForm = ->
     $scope.newTaskList ?= []
@@ -75,17 +81,9 @@
     , (error) ->
       console.log('There was an error in delete the checkIn')
 
-  $scope.updateCheckIn = (checkIn) ->
-    CheckIn.update { check_in: checkIn, id: checkIn.id }
+  $scope.updateCheckIn = (note, checkIn) ->
+    CheckIn.update { check_in: { note: note }, id: checkIn.id }
     , (success) ->
-      $scope.toggleEditMode(checkIn)
       console.log('The check in was successfully updated')
     , (error) ->
       console.log('There was an error in updating the check in')
-
-
-
-
-
-
-

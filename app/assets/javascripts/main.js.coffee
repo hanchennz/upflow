@@ -1,9 +1,9 @@
 @upflow = angular.module('upflow', [
   'ng-rails-csrf',
-  'ngAnimate',
   'ngResource',
   'ngRoute',
-  'ui.bootstrap'
+  'ui.bootstrap',
+  'xeditable'
 ])
 
 @upflow.config ($routeProvider, $locationProvider) ->
@@ -14,3 +14,6 @@
       controller: 'HomeController'
       templateUrl: '../assets/home.html'
     .otherwise redirectTo: '/'
+
+@upflow.run (editableOptions) ->
+  editableOptions.theme = 'bs3'

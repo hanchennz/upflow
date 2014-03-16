@@ -11,7 +11,6 @@
 // about supported directives.
 //
 //= require angular
-//= require angular-animate
 //= require angular-resource
 //= require angular-route
 //= require jquery
@@ -21,3 +20,4 @@
 //= require turbolinks
 //= require_tree .
 //= require underscore
+//= require xeditable

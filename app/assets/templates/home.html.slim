@@ -8,16 +8,15 @@ div.row
   div.col-md-4
     div.task ng-repeat="task in taskList" ng-click="toggleDisplay(task)"
       div.row.header ng-if="!task.editMode"
-        div.col-xs-10.vertical-parent ng-class="{'highlight': task.display}"
+        div.col-xs-10.vertical-parent ng-class="{'highlight': displayed(task)}"
           h4.vertical-centered
             | {{task.name}}
         span.glyphicon.glyphicon-chevron-right.col-xs-2 ng-click="newCheckInForTask(task)"
-      div.body.row.slide ng-if="!task.editMode && task.display"
+      div.body.row ng-if="!task.editMode && displayed(task)"
         div.content.col-xs-10
           div.text
             | {{task.task_type}} - {{task.description}}
           div.footer
-            | Footer
         span.glyphicon.glyphicon-pencil.side-bar.col-xs-2 ng-click="toggleEditMode(task)"
       div ng-if="task.editMode"
         form ng-submit="updateTask(task)"
@@ -52,13 +51,11 @@ div.row
         input ng-model="newCheckIn.note"
         button.btn.btn-success type="submit" Save
         button.btn.btn-warning type="button" ng-click="removeUnsavedCheckIn(newCheckIn)" Cancel
-    div ng-repeat="checkIn in checkInList"
-      div ng-if="!checkIn.editMode"
-        | {{checkIn.id}} - {{checkIn.note}}
-        button.btn.btn-default type="button" ng-click="toggleEditMode(checkIn)" Edit 
-      div ng-if="checkIn.editMode"
-        form ng-submit="updateCheckIn(checkIn)"
-          input ng-model="checkIn.note"
-          button.btn.btn-success type="submit" Save
-          button.btn.btn-danger type="button" ng-click="deleteCheckIn(checkIn)" DELETE
-          button.btn.btn-warning type="button" ng-click="toggleEditMode(checkIn)" Cancel
+    div.check-in ng-repeat="checkIn in checkInList | filter:search" ng-mouseenter="checkIn.editButton = true" ng-mouseleave="checkIn.editButton = false"
+      div.date
+        | {{checkIn.created_at | date: 'EEEE, MMM d,y'}}
+      h4.header ng-hide="search.task_id == checkIn.task_id"
+        | {{checkIn.task_name}}
+      span editable-textarea="checkIn.note" e-cols="60" e-form="checkInNoteForm" onbeforesave="updateCheckIn($data, checkIn)" maxlength="255"
+        ' {{checkIn.note}}
+        span.glyphicon.glyphicon-pencil ng-click="toggleXEditMode(checkInNoteForm)" ng-show="!editMode(checkInNoteForm) && checkIn.editButton"

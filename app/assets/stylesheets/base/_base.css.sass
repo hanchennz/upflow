@@ -1,8 +1,7 @@
-@import "animations"
 @import "variables"
 
 body
-  background-color: $grey
+  background-color: $background-color
 
 .green
   background-color: $green
@@ -19,6 +18,8 @@ div.task
   background-color: $darker-green
   margin: 1rem
   padding-left: 1rem
+  box-shadow: .4rem .2rem .5rem #888888
+  border-radius: 0.3rem
 
   .row
     margin: 0
@@ -46,20 +47,45 @@ div.task
 
       &:before
         position: absolute
-        top: 22.5%
-        right: 30%
+        top: 30%
+        right: 35%
 
   .content
     background-color: $green
+    color: white
+    min-height: 5rem
 
   .glyphicon
-    font-size: 2.4rem
+    font-size: 2rem
     color: white
 
     &:hover
       color: $lightest-green
       cursor: pointer
       transition: .1s linear
+
+.check-in
+  background: white
+  margin: 1rem 0
+  padding: 1rem
+  position: relative
+  min-height: 5rem
+  box-shadow: .4rem .2rem .5rem #888888
+  border-radius: 0.3rem
+
+  .header
+    padding-bottom: 0.5rem
+    margin-top: 0.5rem
+
+  textarea
+    resize: vertical
+    min-height: 10rem
+
+  .date
+    float: right
+    padding: 0.5rem 1rem
+    background: $blue
+    color: white
 
 .vertical-parent:before
   content: ''
