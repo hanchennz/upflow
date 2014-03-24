@@ -7,5 +7,5 @@ class CheckIn < ActiveRecord::Base
   has_one :user, through: :task
 
   # Validations
-  validates :note, presence: true
+  validates :note, length: 1..2000
 end

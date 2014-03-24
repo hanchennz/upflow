@@ -4,10 +4,10 @@ Upflow::Application.routes.draw do
   devise_for :users
 
   namespace :api do
-    resources :check_ins, only: %i(destroy update)
+    resources :check_ins, only: %i(create destroy update)
 
     resources :tasks, only: %i(destroy show update) do
-      resources :check_ins, only: %i(create index)
+      resources :check_ins, only: :index
     end
 
     resources :users, only: [] do

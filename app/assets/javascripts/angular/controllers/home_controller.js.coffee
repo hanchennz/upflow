@@ -6,18 +6,18 @@
     $scope.checkInList = CheckIn.queryUser(user_id: user.id)
     $scope.search = {}
 
+  $scope.newCheckIn = { created_at: new Date() }
+
   $scope.toggleDisplay = (task) ->
     $scope.displayedTask = if $scope.displayedTask == task then undefined else task
     $scope.search.task_id = if $scope.search.task_id == task.id then undefined else task.id
+    $scope.newCheckInForTask(task)
 
   $scope.displayed = (task) -> $scope.displayedTask == task if $scope.displayedTask
-
   $scope.toggleEditMode = (object) ->
     object.editMode = if object.editMode? then !object.editMode else true
-
   $scope.toggleXEditMode = (form) -> form.$show()
-
-  $scope.xEditMode = (form) -> form.$visible
+  $scope.editEnabled = (form) -> form.$visible
 
   $scope.newTaskForm = ->
     $scope.newTaskList ?= []
@@ -49,41 +49,46 @@
   $scope.updateTask = (task) ->
     Task.update { task: task, id: task.id }
     , (success) ->
-      $scope.toggleEditMode(task)
       console.log('The task was successfully updated')
     , (error) ->
       console.log('There was an error in updating the task')
 
   $scope.newCheckInForTask = (task) ->
     $scope.newCheckInList ?= []
-    $scope.newCheckInList.push({
-      task_id: task.id
-      task_name: task.name
-    })
+    unless _.findWhere($scope.newCheckInList, {task_id: task.id})
+      $scope.newCheckInList.push({
+        task_id: task.id
+        task_name: task.name
+        created_at: new Date()
+      })
 
-  $scope.removeUnsavedCheckIn = (checkIn) ->
-    $scope.newCheckInList = _.without($scope.newCheckInList, checkIn)
-
-  $scope.saveCheckIn = (checkIn) ->
-    CheckIn.save { check_in: checkIn, task_id: checkIn.task_id }
+  $scope.saveCheckIn = (newCheckIn) ->
+    CheckIn.save
+      check_in: newCheckIn
+      user_id: $scope.currentUser.id
     , (savedCheckIn) ->
       $scope.checkInList.push(savedCheckIn)
-      $scope.newCheckInList = _.without($scope.newCheckInList, checkIn)
+      if newCheckIn.task_id?
+        $scope.newCheckInList = _.without($scope.newCheckInList, newCheckIn)
+        $scope.newCheckInForTask({ id: newCheckIn.task_id, name: newCheckIn.task_name })
+      else $scope.newCheckIn = { created_at: new Date() }
     , (error) ->
       console.log('Error in saving check in')
-      console.log(error)
 
   $scope.deleteCheckIn = (checkIn) ->
     CheckIn.delete { id: checkIn.id }
     , (success) ->
       $scope.checkInList = _.without($scope.checkInList, checkIn)
-      console.log('checkIn was successfully deleted')
     , (error) ->
       console.log('There was an error in delete the checkIn')
 
   $scope.updateCheckIn = (note, checkIn) ->
+    if note == undefined
+      return 'Saved check-ins cannot be blank.'
     CheckIn.update { check_in: { note: note }, id: checkIn.id }
     , (success) ->
+      checkIn.oldNote = checkIn.note
       console.log('The check in was successfully updated')
     , (error) ->
+      checkIn.note = checkIn.oldNote
       console.log('There was an error in updating the check in')

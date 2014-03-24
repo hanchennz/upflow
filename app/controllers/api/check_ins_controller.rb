@@ -1,4 +1,6 @@
 class Api::CheckInsController < ApplicationController
+  before_filter :create_task, only: :create
+
   def create
     @check_in = CheckIn.new(permitted_params)
     if @check_in.save
@@ -41,5 +43,17 @@ class Api::CheckInsController < ApplicationController
       :note,
       :task_id
     )
+  end
+
+  def create_task
+    if params[:check_in][:task_id].nil?
+      @new_task = Task.create(
+        description: 'Automatically generated task.',
+        name: params[:check_in][:task_name],
+        user_id: params[:user_id],
+        task_type: 'one_off'
+      )
+      params[:check_in][:task_id] = @new_task.id
+    end
   end
 end

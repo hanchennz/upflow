@@ -2,6 +2,19 @@
 
 body
   background-color: $background-color
+  font-family: 'Source Sans Pro', sans-serif
+
+.btn
+  padding-top: 0.3rem
+  border-radius: 0
+  border: none
+
+  &.btn-success
+    background-color: $green
+
+.row
+  margin-left: 0
+  margin-right: 0
 
 .green
   background-color: $green
@@ -9,20 +22,11 @@ body
 .blue
   background-color: $blue
 
-.highlight
-  border-bottom-color: white
-  border-bottom-width: 0.1rem
-  border-bottom-style: solid
-
 div.task
   background-color: $darker-green
   margin: 1rem
   padding-left: 1rem
-  box-shadow: .4rem .2rem .5rem #888888
   border-radius: 0.3rem
-
-  .row
-    margin: 0
 
   .header
     position: relative
@@ -67,25 +71,72 @@ div.task
 .check-in
   background: white
   margin: 1rem 0
-  padding: 1rem
+  padding: 1rem 0
   position: relative
   min-height: 5rem
-  box-shadow: .4rem .2rem .5rem #888888
   border-radius: 0.3rem
 
-  .header
-    padding-bottom: 0.5rem
-    margin-top: 0.5rem
+  h4
+    padding: 0.8rem 0 0.7rem 0
+    margin: 0
+
+  .editable-wrap,
+  .editable-controls,
+  .editable-input
+    width: 100%
+
+  .reduced-content
+    padding-top: 0.5rem
+
+  input[type="text"], textarea, .task-input
+    border: none
+    margin: 0
+    padding: 0
+    width: 100%
+
+    &:focus
+      box-shadow: none
+      outline: none
+
+  input[type="text"], .task-input
+    font-size: 1.8rem
+    border-radius: 0
 
   textarea
+    border: 1px solid transparent
+    border-radius: 0.3rem
+    min-height: 8rem
     resize: vertical
-    min-height: 10rem
+
+  .task-input
+    padding-top: 0.5rem
+    margin-bottom: 0.4rem
+    border-bottom: 1px solid transparent
+    transition: .5s linear
+    &:focus
+      transition: .5s linear
+      border-bottom: 1px solid lightgrey
 
   .date
-    float: right
     padding: 0.5rem 1rem
     background: $blue
     color: white
+
+  span
+    white-space: pre
+
+  .glyphicon
+    font-size: 1.5rem
+    color: grey
+    padding-left: 0.6rem
+
+    &:hover
+      color: black
+      cursor: pointer
+      transition: .1s linear
+
+  .non-x-edit
+    padding: 0
 
 .vertical-parent:before
   content: ''

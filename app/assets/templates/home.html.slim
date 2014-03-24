@@ -1,24 +1,18 @@
 div.row
-  | This is the Landing Page Template.
-  div
-    | {{currentUser.email}}
-  div
-    | {{currentUser.id}}
-div.row
   div.col-md-4
     div.task ng-repeat="task in taskList" ng-click="toggleDisplay(task)"
       div.row.header ng-if="!task.editMode"
-        div.col-xs-10.vertical-parent ng-class="{'highlight': displayed(task)}"
+        div.col-xs-10.vertical-parent
           h4.vertical-centered
             | {{task.name}}
-        span.glyphicon.glyphicon-chevron-right.col-xs-2 ng-click="newCheckInForTask(task)"
+        span.glyphicon.glyphicon-play.col-xs-2
       div.body.row ng-if="!task.editMode && displayed(task)"
         div.content.col-xs-10
-          div.text
-            | {{task.task_type}} - {{task.description}}
+          div
+            | {{task.description}}
           div.footer
         span.glyphicon.glyphicon-pencil.side-bar.col-xs-2 ng-click="toggleEditMode(task)"
-      div ng-if="task.editMode"
+      div.body.row ng-if="task.editMode"
         form ng-submit="updateTask(task)"
           input ng-model="task.name"
           input ng-model="task.task_type"
@@ -45,17 +39,48 @@ div.row
         button.btn.btn-success type="submit" Save Task
         button.btn.btn-warning type="button" Cancel ng-click="removeUnsavedTask(newTask)"
   div.col-md-8
-    div ng-repeat="newCheckIn in newCheckInList"
+    div.check-in ng-if="!search.task_id"
       form ng-submit="saveCheckIn(newCheckIn)"
-        | New Check In for {{newCheckIn.task_name}}
-        input ng-model="newCheckIn.note"
-        button.btn.btn-success type="submit" Save
-        button.btn.btn-warning type="button" ng-click="removeUnsavedCheckIn(newCheckIn)" Cancel
-    div.check-in ng-repeat="checkIn in checkInList | filter:search" ng-mouseenter="checkIn.editButton = true" ng-mouseleave="checkIn.editButton = false"
-      div.date
-        | {{checkIn.created_at | date: 'EEEE, MMM d,y'}}
-      h4.header ng-hide="search.task_id == checkIn.task_id"
-        | {{checkIn.task_name}}
-      span editable-textarea="checkIn.note" e-cols="60" e-form="checkInNoteForm" onbeforesave="updateCheckIn($data, checkIn)" maxlength="255"
-        ' {{checkIn.note}}
-        span.glyphicon.glyphicon-pencil ng-click="toggleXEditMode(checkInNoteForm)" ng-show="!editMode(checkInNoteForm) && checkIn.editButton"
+        div.row
+          div.col-md-9.col-xs-8
+            input.task-input placeholder="Create new task..." ng-model="newCheckIn.task_name" required="" maxlength="50"
+          div.date.col-md-3.col-xs-4.text-right
+            | {{newCheckIn.created_at | date: 'EEEE, MMMM d, y'}}
+        div.row
+          div.col-md-12
+            textarea.non-x-edit placeholder="What did you do today?" ng-model="newCheckIn.note" maxlength="2000" required=""
+          div.col-md-12
+            button.btn.btn-success.pull-right type="submit" Check In
+    div.check-in ng-repeat="newCheckIn in newCheckInList | filter:search" ng-if="search.task_id"
+      form ng-submit="saveCheckIn(newCheckIn)"
+        div.row
+          div.col-md-9.col-xs-8
+            h4
+              | {{newCheckIn.task_name}}
+          div.date.col-md-3.col-xs-4.text-right
+            | {{newCheckIn.created_at | date: 'EEEE, MMMM d, y'}}
+        div.row
+          div.col-md-12
+            textarea.non-x-edit ng-model="newCheckIn.note" placeholder="What did you do today?" maxlength="2000" required=""
+          div.col-md-12
+            button.btn.btn-success.pull-right type="submit" Check In
+    div.check-in.row ng-repeat="checkIn in checkInList | filter:search | orderBy:'created_at':true"
+      div.row
+        div.col-md-9.col-xs-8
+          h4 ng-if="search.task_id != checkIn.task_id"
+            | {{checkIn.task_name}}
+        div.col-md-9.col-xs-8.reduced-content ng-mouseenter="checkIn.noteButtons = true" ng-mouseleave="checkIn.noteButtons = false" ng-if="search.task_id == checkIn.task_id"
+          span editable-textarea="checkIn.note" e-form="checkInNoteForm" onbeforesave="updateCheckIn($data, checkIn)" buttons="no" blur="submit" e-maxlength="2000"
+            | {{checkIn.note}}
+            span ng-show="!editEnabled(checkInNoteForm) && checkIn.noteButtons"
+              span.glyphicon.glyphicon-pencil ng-click="toggleXEditMode(checkInNoteForm)"
+              span.glyphicon.glyphicon-trash ng-click="deleteCheckIn(checkIn)"
+        div.date.col-md-3.col-xs-4.text-right
+          | {{newCheckIn.created_at | date: 'EEEE, MMMM d, y'}}
+      div.row ng-mouseenter="checkIn.noteButtons = true" ng-mouseleave="checkIn.noteButtons = false" ng-if="search.task_id != checkIn.task_id"
+        div.col-md-12
+          span style="width:100%" editable-textarea="checkIn.note" e-form="checkInNoteForm" onbeforesave="updateCheckIn($data, checkIn)" buttons="no" blur="submit" e-maxlength="2000" e-required=""
+            | {{checkIn.note}}
+            span ng-show="!editEnabled(checkInNoteForm) && checkIn.noteButtons"
+              span.glyphicon.glyphicon-pencil ng-click="toggleXEditMode(checkInNoteForm)"
+              span.glyphicon.glyphicon-trash ng-click="deleteCheckIn(checkIn)"

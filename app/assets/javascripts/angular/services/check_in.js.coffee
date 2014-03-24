@@ -9,10 +9,6 @@
     update: {
       method: 'PUT'
     },
-    save: {
-      method: 'POST',
-      url: '/api/tasks/:task_id/check_ins.json'
-    },
     query: {
       method: 'GET',
       isArray: true,
