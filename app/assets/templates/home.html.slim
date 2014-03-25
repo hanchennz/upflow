@@ -73,10 +73,10 @@ div.row
             textarea.non-x-edit ng-model="newCheckIn.note" placeholder="What did you do today?" maxlength="2000" required=""
           div.col-md-12
             button.btn.btn-success.pull-right type="submit" Check In
-    div.check-in.row ng-repeat="checkIn in checkInList | filter:search | orderBy:'created_at':true" autoscroll=""
+    div.check-in.row.check-in-animate ng-repeat="checkIn in checkInList | filter:search | orderBy:'created_at':true" autoscroll=""
       div.row
         div.col-md-9.col-xs-8
-          h4 ng-if="search.task_id != checkIn.task_id"
+          h4.check-in-name-animate ng-if="search.task_id != checkIn.task_id"
             | {{checkIn.task_name}}
         div.col-md-9.col-xs-8.reduced-content ng-mouseenter="checkIn.noteButtons = true" ng-mouseleave="checkIn.noteButtons = false" ng-if="search.task_id == checkIn.task_id"
           span editable-textarea="checkIn.note" e-form="checkInNoteForm" onbeforesave="updateCheckIn($data, checkIn)" buttons="no" blur="submit" e-maxlength="2000"

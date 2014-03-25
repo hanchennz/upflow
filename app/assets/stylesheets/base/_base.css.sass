@@ -177,3 +177,47 @@ div.task
 .vertical-centered
   display: inline-block
   vertical-align: middle
+
+.check-in-name.ng-enter,
+.check-in-name.ng-leave
+  -webkit-transition: 0.5s linear all
+  transition: 0.5s linear all
+  position: relative
+  display: block
+  overflow: hidden
+  text-overflow: clip
+
+.check-in-name.ng-enter
+  opacity: 0
+  top: -5rem
+
+.check-in-name.ng-leave.ng-leave-active
+  opacity: 0
+  top: 5rem
+
+.check-in-name.ng-leave,
+.check-in-name.ng-enter.ng-enter-active
+  opacity: 1
+  top: 0rem
+
+.check-in-animate.ng-enter,
+.check-in-animate.ng-leave
+  -webkit-transition: 0.5s linear all
+  transition: 0.5s linear all
+  position: relative
+  display: block
+  overflow: hidden
+  text-overflow: clip
+
+.check-in-animate.ng-enter
+  opacity: 0
+  top: -5rem
+
+.check-in-animate.ng-leave.ng-leave-active
+  opacity: 0
+  top: 5rem
+
+.check-in-animate.ng-leave,
+.check-in-animate.ng-enter.ng-enter-active
+  opacity: 1
+  top: 0rem
