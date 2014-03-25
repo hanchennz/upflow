@@ -54,6 +54,7 @@ group :development, :test do
 end
 
 gem 'bootstrap-sass', '~> 3.1.1'
+gem 'chosen-rails'
 gem 'devise'
 gem 'enumerize'
 gem 'ng-rails-csrf'

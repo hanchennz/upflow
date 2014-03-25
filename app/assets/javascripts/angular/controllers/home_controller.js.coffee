@@ -6,7 +6,8 @@
     $scope.checkInList = CheckIn.queryUser(user_id: user.id)
     $scope.search = {}
 
-  $scope.newCheckIn = { created_at: new Date() }
+  $scope.newCheckIn = { created_at: new Date(), repeat_by: 5 }
+  $scope.repeat_by_options = [ 1, 3, 5, 7, 10, 15, 30 ]
 
   $scope.toggleDisplay = (task) ->
     $scope.displayedTask = if $scope.displayedTask == task then undefined else task
@@ -52,6 +53,13 @@
       console.log('The task was successfully updated')
     , (error) ->
       console.log('There was an error in updating the task')
+
+  $scope.updateTaskRepeat = (task, option) ->
+    Task.update { task: { repeat_by: option }, id: task.id }
+    , (success) ->
+      task.repeat_by = option
+    , (error) ->
+      console.log("error in updating task repeat")
 
   $scope.newCheckInForTask = (task) ->
     $scope.newCheckInList ?= []

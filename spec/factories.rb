@@ -18,6 +18,7 @@ FactoryGirl.define do
     border_color 'none'
     color 'green'
     name { "#{Faker::Company.name}" + ' Task' }
+    repeat_by { rand(1..6) }
     task_type 'one_off'
     description { Faker::Lorem.sentence(1) }
   end

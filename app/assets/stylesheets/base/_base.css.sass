@@ -1,8 +1,11 @@
 @import "variables"
 
 body
-  background-color: $background-color
+  background-color: $background-color-purple
   font-family: 'Source Sans Pro', sans-serif
+
+.btn-group > .btn
+  margin: 0 0.1rem
 
 .btn
   padding-top: 0.3rem
@@ -11,20 +14,39 @@ body
 
   &.btn-success
     background-color: $green
+    color: white
 
 .row
   margin-left: 0
   margin-right: 0
 
-.green
-  background-color: $green
+=color($color, $darkcolor)
+  background-color: #{$darkcolor}
+  .header div, .content
+    background-color: #{$color}
+  .btn-group > .btn-default
+    color: white
+    background-color: #{$color}
+    &.active
+      background-color: #{$darkcolor}
 
-.blue
-  background-color: $blue
+div.blue
+  @include color($blue, $darker-blue)
+
+div.red
+  @include color($red, $darker-red)
+
+div.orange
+  @include color($orange, $darker-orange)
+
+div.yellow
+  @include color($yellow, $darker-yellow)
+
+div.green
+  @include color($green, $darker-green)
 
 div.task
-  background-color: $darker-green
-  margin: 1rem
+  margin: 1rem 0
   padding-left: 1rem
   border-radius: 0.3rem
 
@@ -33,7 +55,6 @@ div.task
     min-height: 5rem
 
     div
-      background-color: $green
       position: absolute
       top: 0
       left: 0
@@ -42,6 +63,7 @@ div.task
       h4
         margin: 0
         color: white
+        font-weight: 600
 
     span
       position: absolute
@@ -55,7 +77,6 @@ div.task
         right: 35%
 
   .content
-    background-color: $green
     color: white
     min-height: 5rem
 
@@ -63,10 +84,9 @@ div.task
     font-size: 2rem
     color: white
 
-    &:hover
-      color: $lightest-green
-      cursor: pointer
-      transition: .1s linear
+  .footer
+    text-align: center
+    padding: 1rem 0
 
 .check-in
   background: white
@@ -121,6 +141,15 @@ div.task
     padding: 0.5rem 1rem
     background: $blue
     color: white
+
+  .btn-group > .btn-default
+    color: lightgrey
+    &.active
+      background: $green
+      color: white
+
+  .repeat-by
+    color: grey
 
   span
     white-space: pre

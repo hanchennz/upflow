@@ -1,16 +1,19 @@
 div.row
   div.col-md-4
-    div.task ng-repeat="task in taskList" ng-click="toggleDisplay(task)"
+    div.task ng-repeat="task in taskList | orderBy:['rank', 'repeat_by']" ng-click="toggleDisplay(task)" ng-class="task.color" autoscroll=""
       div.row.header ng-if="!task.editMode"
         div.col-xs-10.vertical-parent
           h4.vertical-centered
             | {{task.name}}
         span.glyphicon.glyphicon-play.col-xs-2
-      div.body.row ng-if="!task.editMode && displayed(task)"
+      div.body.row ng-if="!task.editMode && displayed(task)" ng-click="$event.stopPropagation()"
         div.content.col-xs-10
           div
             | {{task.description}}
           div.footer
+            div.btn-group
+              button.btn.btn-default ng-repeat="option in repeat_by_options" type="button" ng-class="{active: task.repeat_by == option}" ng-click="updateTaskRepeat(task, option)"
+                | {{option}}
         span.glyphicon.glyphicon-pencil.side-bar.col-xs-2 ng-click="toggleEditMode(task)"
       div.body.row ng-if="task.editMode"
         form ng-submit="updateTask(task)"
@@ -49,7 +52,13 @@ div.row
         div.row
           div.col-md-12
             textarea.non-x-edit placeholder="What did you do today?" ng-model="newCheckIn.note" maxlength="2000" required=""
-          div.col-md-12
+        div.row
+          div.col-xs-10.repeat-by
+            ' Days between each Check In:
+            div.btn-group
+              button.btn.btn-default ng-repeat="option in repeat_by_options" type="button" ng-class="{active: newCheckIn.repeat_by == option}" ng-click="newCheckIn.repeat_by = option"
+                | {{option}}
+          div.col-xs-2
             button.btn.btn-success.pull-right type="submit" Check In
     div.check-in ng-repeat="newCheckIn in newCheckInList | filter:search" ng-if="search.task_id"
       form ng-submit="saveCheckIn(newCheckIn)"
@@ -64,7 +73,7 @@ div.row
             textarea.non-x-edit ng-model="newCheckIn.note" placeholder="What did you do today?" maxlength="2000" required=""
           div.col-md-12
             button.btn.btn-success.pull-right type="submit" Check In
-    div.check-in.row ng-repeat="checkIn in checkInList | filter:search | orderBy:'created_at':true"
+    div.check-in.row ng-repeat="checkIn in checkInList | filter:search | orderBy:'created_at':true" autoscroll=""
       div.row
         div.col-md-9.col-xs-8
           h4 ng-if="search.task_id != checkIn.task_id"

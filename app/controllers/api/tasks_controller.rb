@@ -20,6 +20,7 @@ class Api::TasksController < ApplicationController
   def index
     @user = User.find(params[:user_id])
     @tasks = @user.tasks
+    @tasks.map(&:update_colors)
   end
 
   def show
@@ -45,6 +46,7 @@ class Api::TasksController < ApplicationController
       :due_at,
       :id,
       :name,
+      :repeat_by,
       :task_type,
       :user_id
     )
