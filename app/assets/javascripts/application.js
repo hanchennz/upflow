@@ -16,9 +16,9 @@
 //= require angular-route
 //= require jquery
 //= require jquery_ujs
+//= require main
 //= require ng-rails-csrf
 //= require turbolinks
 //= require underscore
 //= require xeditable
-//= require main
 //= require_tree .

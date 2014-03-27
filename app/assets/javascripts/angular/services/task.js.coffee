@@ -1,4 +1,6 @@
-@upflow.factory 'Task', ($resource) ->
+@upflow.factory 'Task', [
+  "$resource"
+  ($resource) ->
   service = $resource(
     '/api/tasks/:id.json',
     {
@@ -18,3 +20,4 @@
       url: '/api/users/:user_id/tasks.json'
     }
   )
+]
