@@ -56,7 +56,7 @@ end
 
 gem 'bootstrap-sass', '~> 3.1.1'
 gem 'chosen-rails'
-gem 'compass-rails', '~> 2.0.alpha.0'
+gem 'compass-rails', '~> 1.1.2'
 gem 'devise'
 gem 'enumerize'
 gem 'ng-rails-csrf'
