@@ -1,3 +1,5 @@
+#= depend_on_asset 'home.html'
+
 @upflow = angular.module('upflow', [
   'ng-rails-csrf',
   'ngAnimate',
