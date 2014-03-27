@@ -1,7 +1,7 @@
 @import "variables"
 
 body
-  background-color: $background-color-purple
+  background-color: $background-color-darker-grey
   font-family: 'Source Sans Pro', sans-serif
 
 .btn-group > .btn
@@ -21,7 +21,7 @@ body
   margin-right: 0
 
 =color($color, $darkcolor)
-  background-color: #{$darkcolor}
+  background-color: #{$color}
   .header div, .content
     background-color: #{$color}
   .btn-group > .btn-default
@@ -46,9 +46,7 @@ div.green
   @include color($green, $darker-green)
 
 div.task
-  margin: 1rem 0
-  padding-left: 1rem
-  border-radius: 0.3rem
+  margin: 0.1rem 0
 
   .header
     position: relative
@@ -90,11 +88,10 @@ div.task
 
 .check-in
   background: white
-  margin: 1rem 0
+  margin: 0.3rem 0
   padding: 1rem 0
   position: relative
   min-height: 5rem
-  border-radius: 0.3rem
 
   h4
     padding: 0.8rem 0 0.7rem 0
@@ -177,47 +174,3 @@ div.task
 .vertical-centered
   display: inline-block
   vertical-align: middle
-
-.check-in-name.ng-enter,
-.check-in-name.ng-leave
-  -webkit-transition: 0.5s linear all
-  transition: 0.5s linear all
-  position: relative
-  display: block
-  overflow: hidden
-  text-overflow: clip
-
-.check-in-name.ng-enter
-  opacity: 0
-  top: -5rem
-
-.check-in-name.ng-leave.ng-leave-active
-  opacity: 0
-  top: 5rem
-
-.check-in-name.ng-leave,
-.check-in-name.ng-enter.ng-enter-active
-  opacity: 1
-  top: 0rem
-
-.check-in-animate.ng-enter,
-.check-in-animate.ng-leave
-  -webkit-transition: 0.5s linear all
-  transition: 0.5s linear all
-  position: relative
-  display: block
-  overflow: hidden
-  text-overflow: clip
-
-.check-in-animate.ng-enter
-  opacity: 0
-  top: -5rem
-
-.check-in-animate.ng-leave.ng-leave-active
-  opacity: 0
-  top: 5rem
-
-.check-in-animate.ng-leave,
-.check-in-animate.ng-enter.ng-enter-active
-  opacity: 1
-  top: 0rem

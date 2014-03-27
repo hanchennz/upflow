@@ -3,6 +3,8 @@ class Task < ActiveRecord::Base
   acts_as_paranoid
   has_paper_trail
 
+  after_find :update_colors
+
   # Associations
   belongs_to :user, inverse_of: :tasks
   has_many :check_ins, dependent: :destroy, inverse_of: :task
@@ -28,25 +30,28 @@ class Task < ActiveRecord::Base
   validates :repeat_by, presence: true
   validates :task_type, presence: true
 
+  def last_check_in
+    if check_ins.last.nil?
+      task.created_at
+    else
+      check_ins.last.created_at
+    end
+  end
+
+  def next_due_date
+    last_check_in + self.repeat_by.days
+  end
+
   def update_colors
     if self.repeat_by.nil?
       self.repeat_by = 5
     end
 
-    if check_ins.last.nil?
-      last_check_in = self.repeat_by.months.ago
-    else
-      last_check_in = check_ins.last.created_at
-    end
-
     if task_type.one_off?
-      next_due_date = last_check_in + self.repeat_by.days
       if completed_at?
         update_attributes(color: 'blue', rank: 4)
       elsif next_due_date < DateTime.now
         update_attributes(color: 'red', rank: 0)
-      elsif last_check_in + 12.hours > DateTime.now
-        update_attributes(color: 'green', rank: 3)
       elsif next_due_date <= 1.day.from_now
         update_attributes(color: 'orange', rank: 1)
       elsif next_due_date <= 2.days.from_now

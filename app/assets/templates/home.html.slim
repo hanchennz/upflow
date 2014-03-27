@@ -85,7 +85,7 @@ div.row
               span.glyphicon.glyphicon-pencil ng-click="toggleXEditMode(checkInNoteForm)"
               span.glyphicon.glyphicon-trash ng-click="deleteCheckIn(checkIn)"
         div.date.col-md-3.col-xs-4.text-right
-          | {{newCheckIn.created_at | date: 'EEEE, MMMM d, y'}}
+          | {{checkIn.created_at | date: 'EEEE, MMMM d, y'}}
       div.row ng-mouseenter="checkIn.noteButtons = true" ng-mouseleave="checkIn.noteButtons = false" ng-if="search.task_id != checkIn.task_id"
         div.col-md-12
           span style="width:100%" editable-textarea="checkIn.note" e-form="checkInNoteForm" onbeforesave="updateCheckIn($data, checkIn)" buttons="no" blur="submit" e-maxlength="2000" e-required=""

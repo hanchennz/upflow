@@ -4,7 +4,6 @@ class Api::CheckInsController < ApplicationController
   def create
     @check_in = CheckIn.new(permitted_params)
     if @check_in.save
-      Task.find_by(id: @check_in.task_id).update_colors
       render 'show', status: :created
     else
       render_validation_errors @check_in
