@@ -1,6 +1,6 @@
 source 'https://rubygems.org'
 
-ruby '2.1.1'
+ruby '2.0.0'
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '4.0.2'
@@ -56,6 +56,7 @@ end
 
 gem 'bootstrap-sass', '~> 3.1.1'
 gem 'chosen-rails'
+gem 'compass-rails', '~> 2.0.alpha.0'
 gem 'devise'
 gem 'enumerize'
 gem 'ng-rails-csrf'

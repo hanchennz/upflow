@@ -204,6 +204,7 @@ DEPENDENCIES
   chosen-rails
   coffee-rails (~> 4.0.0)
   coffeelint
+  compass-rails (~> 2.0.alpha.0)
   devise
   enumerize
   factory_girl_rails
