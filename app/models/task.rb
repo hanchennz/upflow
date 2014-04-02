@@ -32,7 +32,7 @@ class Task < ActiveRecord::Base
 
   def last_check_in
     if check_ins.last.nil?
-      task.created_at
+      created_at
     else
       check_ins.last.created_at
     end

@@ -1,6 +1,4 @@
-@upflow.factory 'Session', [
-  "$resource",
-  ($resource) ->
+@upflow.factory 'Session', ($resource) ->
   service = $resource '/api/users/:action.json', { action: '@action' },
     current: { method: 'GET', params: { action: 'current'} }
 
@@ -24,4 +22,3 @@
           failure(error) if angular.isFunction failure
 
   session
-]

@@ -2,6 +2,7 @@
 
 body
   background-color: $background-color-darker-grey
+  background: url(images/background.jpg) no-repeat center center fixed
   font-family: 'Source Sans Pro', sans-serif
 
 .btn-group > .btn
@@ -46,7 +47,9 @@ div.green
   @include color($green, $darker-green)
 
 div.task
-  margin: 0.1rem 0
+  margin: 0.6rem 0
+  border: 1px solid grey
+  box-shadow: 0px 0px 1px 0px lightgrey
 
   .header
     position: relative
@@ -79,16 +82,22 @@ div.task
     min-height: 5rem
 
   .glyphicon
-    font-size: 2rem
     color: white
+    top: 0.8rem
 
   .footer
     text-align: center
     padding: 1rem 0
 
+  .editable-wrap,
+  .editable-controls,
+  .editable-input
+    width: 100%
+
 .check-in
   background: white
-  margin: 0.3rem 0
+  border-top: 1px solid lightgrey
+  margin: 0
   padding: 1rem 0
   position: relative
   min-height: 5rem
@@ -151,18 +160,18 @@ div.task
   span
     white-space: pre
 
-  .glyphicon
-    font-size: 1.5rem
-    color: grey
-    padding-left: 0.6rem
-
-    &:hover
-      color: black
-      cursor: pointer
-      transition: .1s linear
-
   .non-x-edit
     padding: 0
+
+.glyphicon
+  font-size: 1.5rem
+  color: grey
+  padding-left: 0.6rem
+
+  &:hover
+    color: black
+    cursor: pointer
+    transition: .1s linear
 
 .vertical-parent:before
   content: ''

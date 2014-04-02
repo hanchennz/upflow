@@ -6,9 +6,12 @@
 development:
   adapter: postgresql
   encoding: unicode
+  host: localhost
   database: 'upflow_development'
   pool: 5
   timeout: 5000
+  password: postgres
+  username: postgres
 
 # Warning: The database defined as "test" will be erased and
 # re-generated from your development database when you run "rake".
@@ -16,13 +19,19 @@ development:
 test:
   adapter: postgresql
   encoding: unicode
+  host: localhost
   database: 'upflow_test'
   pool: 5
   timeout: 5000
+  password: postgres
+  username: postgres
 
 production:
   adapter: postgresql
   encoding: unicode
+  host: localhost
   database: 'upflow_production'
   pool: 5
   timeout: 5000
+  password: postgres
+  username: postgres

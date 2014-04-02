@@ -5,8 +5,8 @@
     $scope.taskList = Task.index(user_id: user.id)
     $scope.checkInList = CheckIn.queryUser(user_id: user.id)
     $scope.search = {}
+    addNewTask()
 
-  $scope.newCheckIn = { created_at: new Date(), repeat_by: 5 }
   $scope.repeat_by_options = [ 1, 3, 5, 7, 10, 15, 30 ]
 
   $scope.toggleDisplay = (task) ->
@@ -19,22 +19,20 @@
     object.editMode = if object.editMode? then !object.editMode else true
   $scope.toggleXEditMode = (form) -> form.$show()
   $scope.editEnabled = (form) -> form.$visible
-
-  $scope.newTaskForm = ->
-    $scope.newTaskList ?= []
-    $scope.newTaskList.push({
-      task_type: 'one_off'
-      user_id: $scope.currentUser.id
-    })
-
-  $scope.removeUnsavedTask = (task) ->
-    $scope.newTaskList = _.without($scope.newTaskList, task)
+  addNewTask = ->
+    $scope.newTask = {
+      created_at: new Date(),
+      repeat_by: 5,
+      task_type: 'one_off',
+      user_id: $scope.currentUser.id }
+  start = new Date().setHours(0,0,0,0)
+  $scope.done = (task) -> Date.parse(task.last_check_in) > start
 
   $scope.saveTask = (task) ->
     Task.save { task: task, user_id: $scope.currentUser.id }
     , (savedTask) ->
       $scope.taskList.push(savedTask)
-      $scope.newTaskList = _.without($scope.newTaskList, task)
+      addNewTask()
     , (error) ->
       console.log('Error in saving task')
       console.log(error)
@@ -47,12 +45,16 @@
     , (error) ->
       console.log('There was an error in delete the task')
 
-  $scope.updateTask = (task) ->
-    Task.update { task: task, id: task.id }
+  $scope.updateTaskDescription = (description, task) ->
+    unless description?
+      return 'Task description cannot be blank.'
+    Task.update { task: {description: description}, id: task.id }
     , (success) ->
-      console.log('The task was successfully updated')
+      task.oldDescription = task.description
+      console.log('The task description was successfully updated')
     , (error) ->
-      console.log('There was an error in updating the task')
+      task.description = task.oldDescription
+      console.log('There was an error in updating the task description')
 
   $scope.updateTaskRepeat = (task, option) ->
     Task.update { task: { repeat_by: option }, id: task.id }
@@ -70,16 +72,18 @@
         created_at: new Date()
       })
 
+  $scope.updateLastCheckIn = (task_id) ->
+    _.findWhere($scope.taskList, {id: task_id}).last_check_in = new Date()
+
   $scope.saveCheckIn = (newCheckIn) ->
     CheckIn.save
       check_in: newCheckIn
       user_id: $scope.currentUser.id
     , (savedCheckIn) ->
       $scope.checkInList.push(savedCheckIn)
-      if newCheckIn.task_id?
-        $scope.newCheckInList = _.without($scope.newCheckInList, newCheckIn)
-        $scope.newCheckInForTask({ id: newCheckIn.task_id, name: newCheckIn.task_name })
-      else $scope.newCheckIn = { created_at: new Date() }
+      $scope.updateLastCheckIn(savedCheckIn.task_id)
+      $scope.newCheckInList = _.without($scope.newCheckInList, newCheckIn)
+      $scope.newCheckInForTask({ id: newCheckIn.task_id, name: newCheckIn.task_name })
     , (error) ->
       console.log('Error in saving check in')
 

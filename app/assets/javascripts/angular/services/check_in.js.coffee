@@ -1,6 +1,4 @@
-@upflow.factory 'CheckIn', [
-  "$resource"
-  ($resource) ->
+@upflow.factory 'CheckIn', ($resource) ->
   service = $resource(
     '/api/check_ins/:id.json',
     {
@@ -22,4 +20,3 @@
       url: '/api/users/:user_id/check_ins.json'
     }
   )
-]

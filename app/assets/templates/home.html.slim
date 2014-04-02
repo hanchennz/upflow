@@ -1,65 +1,21 @@
 div.row
-  div.col-md-4
-    div.task ng-repeat="task in taskList | orderBy:['rank', 'repeat_by']" ng-click="toggleDisplay(task)" ng-class="task.color" autoscroll=""
-      div.row.header ng-if="!task.editMode"
-        div.col-xs-10.vertical-parent
-          h4.vertical-centered
-            | {{task.name}}
-        span.glyphicon.glyphicon-play.col-xs-2
-      div.body.row ng-if="!task.editMode && displayed(task)" ng-click="$event.stopPropagation()"
-        div.content.col-xs-10
-          div
-            | {{task.description}}
-          div.footer
-            div.btn-group
-              button.btn.btn-default ng-repeat="option in repeat_by_options" type="button" ng-class="{active: task.repeat_by == option}" ng-click="updateTaskRepeat(task, option)"
-                | {{option}}
-        span.glyphicon.glyphicon-pencil.side-bar.col-xs-2 ng-click="toggleEditMode(task)"
-      div.body.row ng-if="task.editMode"
-        form ng-submit="updateTask(task)"
-          input ng-model="task.name"
-          input ng-model="task.task_type"
-          input ng-model="task.description"
-          button.btn.btn-success type="submit" Save Task
-          button.btn.btn-danger type="button" ng-click="deleteTask(task)" DELETE
-          button.btn.btn-warning type="button" ng-click="toggleEditMode(task)" Cancel
-    div
-      button.btn.btn-primary ng-click="newTaskForm()" Add New Task
-    div ng-repeat="newTask in newTaskList"
-      form ng-submit="saveTask(newTask)"
-        div
-          label Name
-          input ng-model="newTask.name"
-        div
-          label Type
-          input ng-model="newTask.task_type"
-        div
-          label Due Date
-          input type="date" ng-model="newTask.due_at"
-        div
-          label Description
-          textarea ng-model="newTask.description"
-        button.btn.btn-success type="submit" Save Task
-        button.btn.btn-warning type="button" Cancel ng-click="removeUnsavedTask(newTask)"
   div.col-md-8
-    div.check-in ng-if="!search.task_id"
-      form ng-submit="saveCheckIn(newCheckIn)"
+    div.check-in.new-task ng-if="!search.task_id"
+      form ng-submit="saveTask(newTask)"
         div.row
-          div.col-md-9.col-xs-8
-            input.task-input placeholder="Create new task..." ng-model="newCheckIn.task_name" required="" maxlength="50"
-          div.date.col-md-3.col-xs-4.text-right
-            | {{newCheckIn.created_at | date: 'EEEE, MMMM d, y'}}
+          div.col-xs-12
+            input.task-input placeholder="Create new task..." ng-model="newTask.name" required="" maxlength="50"
         div.row
           div.col-md-12
-            textarea.non-x-edit placeholder="What did you do today?" ng-model="newCheckIn.note" maxlength="2000" required=""
+            textarea.non-x-edit placeholder="What do you want to get done?" ng-model="newTask.description" maxlength="2000" required=""
         div.row
           div.col-xs-10.repeat-by
             ' Days between each Check In:
             div.btn-group
-              button.btn.btn-default ng-repeat="option in repeat_by_options" type="button" ng-class="{active: newCheckIn.repeat_by == option}" ng-click="newCheckIn.repeat_by = option"
+              button.btn.btn-default ng-repeat="option in repeat_by_options" type="button" ng-class="{active: newTask.repeat_by == option}" ng-click="newTask.repeat_by = option"
                 | {{option}}
           div.col-xs-2
-            button.btn.btn-success.pull-right type="submit" Check In
+            button.btn.btn-success.pull-right type="submit" Create Task
     div.check-in ng-repeat="newCheckIn in newCheckInList | filter:search" ng-if="search.task_id"
       form ng-submit="saveCheckIn(newCheckIn)"
         div.row
@@ -78,18 +34,43 @@ div.row
         div.col-md-9.col-xs-8
           h4.check-in-name-animate ng-if="search.task_id != checkIn.task_id"
             | {{checkIn.task_name}}
-        div.col-md-9.col-xs-8.reduced-content ng-mouseenter="checkIn.noteButtons = true" ng-mouseleave="checkIn.noteButtons = false" ng-if="search.task_id == checkIn.task_id"
-          span editable-textarea="checkIn.note" e-form="checkInNoteForm" onbeforesave="updateCheckIn($data, checkIn)" buttons="no" blur="submit" e-maxlength="2000"
-            | {{checkIn.note}}
-            span ng-show="!editEnabled(checkInNoteForm) && checkIn.noteButtons"
-              span.glyphicon.glyphicon-pencil ng-click="toggleXEditMode(checkInNoteForm)"
-              span.glyphicon.glyphicon-trash ng-click="deleteCheckIn(checkIn)"
-        div.date.col-md-3.col-xs-4.text-right
+        div.date.col-md-3.col-xs-4.text-right ng-if="search.task_id != checkIn.task_id"
           | {{checkIn.created_at | date: 'EEEE, MMMM d, y'}}
-      div.row ng-mouseenter="checkIn.noteButtons = true" ng-mouseleave="checkIn.noteButtons = false" ng-if="search.task_id != checkIn.task_id"
-        div.col-md-12
-          span style="width:100%" editable-textarea="checkIn.note" e-form="checkInNoteForm" onbeforesave="updateCheckIn($data, checkIn)" buttons="no" blur="submit" e-maxlength="2000" e-required=""
+        div.col-md-9.col-xs-8.reduced-content ng-mouseenter="checkIn.noteButtons = true" ng-mouseleave="checkIn.noteButtons = false" ng-if="search.task_id == checkIn.task_id || !search.task_id"
+          div editable-textarea="checkIn.note" e-form="checkInNoteForm" onbeforesave="updateCheckIn($data, checkIn)" buttons="no" blur="submit" e-maxlength="2000" ng-init="checkIn.oldNote = checkIn.note"
             | {{checkIn.note}}
             span ng-show="!editEnabled(checkInNoteForm) && checkIn.noteButtons"
               span.glyphicon.glyphicon-pencil ng-click="toggleXEditMode(checkInNoteForm)"
               span.glyphicon.glyphicon-trash ng-click="deleteCheckIn(checkIn)"
+        div.date.col-md-3.col-xs-4.text-right ng-if="search.task_id == checkIn.task_id"
+          | {{checkIn.created_at | date: 'EEEE, MMMM d, y'}}
+  div.col-md-4.no-left-margin
+    div.task ng-repeat="task in taskList | orderBy:['rank', 'repeat_by']" ng-click="toggleDisplay(task)" class="{{task.color}}" ng-class="{active: displayed(task)}" autoscroll=""
+      div.row.header ng-if="!task.editMode"
+        div.col-xs-10.vertical-parent ng-mouseenter="task.nameButtons = true" ng-mouseleave="task.nameButtons = false"
+          h4.vertical-centered editable-textarea="task.name" e-form="taskNameForm" onbeforesave="updateTaskName($data, task)" buttons="no" blur="submit" e-maxlength="50" ng-init="task.oldName = task.name"
+            | {{task.name}}
+            span.glyphicon.glyphicon-pencil ng-click="toggleXEditMode(taskNameForm)" ng-show="!editEnabled(taskNameForm) && task.nameButtons && displayed(task)"
+        span.glyphicon.glyphicon-record.col-xs-2 ng-hide="done(task)"
+        span.glyphicon.glyphicon-ok-circle.col-xs-2 ng-show="done(task)"
+      span ng-if="!task.editMode && displayed(task)" ng-click="$event.stopPropagation()"
+        div.body.row
+          div.content.col-xs-12 ng-mouseenter="task.descriptionButtons = true" ng-mouseleave="task.descriptionButtons = false"
+            div editable-textarea="task.description" e-form="taskDescriptionForm" onbeforesave="updateTaskDescription($data, task)" buttons="no" blur="submit" e-maxlength="2000" ng-init="task.oldDescription = task.description"
+              | {{task.description}}
+              span ng-show="!editEnabled(taskDescriptionForm) && task.descriptionButtons"
+                span.glyphicon.glyphicon-pencil ng-click="toggleXEditMode(taskDescriptionForm)"
+        div.footer.row
+          div.btn-group.col-xs-10
+            button.btn.btn-default ng-repeat="option in repeat_by_options" type="button" ng-class="{active: task.repeat_by == option}" ng-click="updateTaskRepeat(task, option)"
+              | {{option}}
+          div.col-xs-2
+            span.glyphicon.glyphicon-trash ng-click="deleteTask(task)"
+      div.body.row ng-if="task.editMode"
+        form ng-submit="updateTask(task)"
+          input ng-model="task.name"
+          input ng-model="task.task_type"
+          input ng-model="task.description"
+          button.btn.btn-success type="submit" Save Task
+          button.btn.btn-danger type="button" ng-click="deleteTask(task)" DELETE
+          button.btn.btn-warning type="button" ng-click="toggleEditMode(task)" Cancel
