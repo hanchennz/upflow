@@ -56,6 +56,17 @@
       task.description = task.oldDescription
       console.log('There was an error in updating the task description')
 
+  $scope.updateTaskName = (name, task) ->
+    unless name?
+      return 'Task name cannot be blank.'
+    Task.update { task: {name: name}, id: task.id }
+    , (success) ->
+      task.oldName = task.name
+      console.log('The task name was successfully updated')
+    , (error) ->
+      task.name = task.oldName
+      console.log('There was an error in updating the task name')
+
   $scope.updateTaskRepeat = (task, option) ->
     Task.update { task: { repeat_by: option }, id: task.id }
     , (success) ->
@@ -104,3 +115,5 @@
     , (error) ->
       checkIn.note = checkIn.oldNote
       console.log('There was an error in updating the check in')
+
+HomeController.$inject = ['$scope', 'CheckIn', 'Session', 'Task']

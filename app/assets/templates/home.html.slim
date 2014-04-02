@@ -44,33 +44,28 @@ div.row
               span.glyphicon.glyphicon-trash ng-click="deleteCheckIn(checkIn)"
         div.date.col-md-3.col-xs-4.text-right ng-if="search.task_id == checkIn.task_id"
           | {{checkIn.created_at | date: 'EEEE, MMMM d, y'}}
-  div.col-md-4.no-left-margin
-    div.task ng-repeat="task in taskList | orderBy:['rank', 'repeat_by']" ng-click="toggleDisplay(task)" class="{{task.color}}" ng-class="{active: displayed(task)}" autoscroll=""
-      div.row.header ng-if="!task.editMode"
-        div.col-xs-10.vertical-parent ng-mouseenter="task.nameButtons = true" ng-mouseleave="task.nameButtons = false"
-          h4.vertical-centered editable-textarea="task.name" e-form="taskNameForm" onbeforesave="updateTaskName($data, task)" buttons="no" blur="submit" e-maxlength="50" ng-init="task.oldName = task.name"
-            | {{task.name}}
-            span.glyphicon.glyphicon-pencil ng-click="toggleXEditMode(taskNameForm)" ng-show="!editEnabled(taskNameForm) && task.nameButtons && displayed(task)"
-        span.glyphicon.glyphicon-record.col-xs-2 ng-hide="done(task)"
-        span.glyphicon.glyphicon-ok-circle.col-xs-2 ng-show="done(task)"
-      span ng-if="!task.editMode && displayed(task)" ng-click="$event.stopPropagation()"
-        div.body.row
-          div.content.col-xs-12 ng-mouseenter="task.descriptionButtons = true" ng-mouseleave="task.descriptionButtons = false"
-            div editable-textarea="task.description" e-form="taskDescriptionForm" onbeforesave="updateTaskDescription($data, task)" buttons="no" blur="submit" e-maxlength="2000" ng-init="task.oldDescription = task.description"
-              | {{task.description}}
-              span ng-show="!editEnabled(taskDescriptionForm) && task.descriptionButtons"
-                span.glyphicon.glyphicon-pencil ng-click="toggleXEditMode(taskDescriptionForm)"
-        div.footer.row
-          div.btn-group.col-xs-10
-            button.btn.btn-default ng-repeat="option in repeat_by_options" type="button" ng-class="{active: task.repeat_by == option}" ng-click="updateTaskRepeat(task, option)"
-              | {{option}}
-          div.col-xs-2
-            span.glyphicon.glyphicon-trash ng-click="deleteTask(task)"
-      div.body.row ng-if="task.editMode"
-        form ng-submit="updateTask(task)"
-          input ng-model="task.name"
-          input ng-model="task.task_type"
-          input ng-model="task.description"
-          button.btn.btn-success type="submit" Save Task
-          button.btn.btn-danger type="button" ng-click="deleteTask(task)" DELETE
-          button.btn.btn-warning type="button" ng-click="toggleEditMode(task)" Cancel
+  div.col-md-4
+    div ng-repeat="task in taskList | orderBy:['rank', 'repeat_by']" ng-click="toggleDisplay(task)" autoscroll=""
+      div.task class="{{task.color}}" ng-class="{active: displayed(task) || !done(task)}"
+        div.row.header ng-if="!task.editMode"
+          div.col-xs-10.vertical-parent ng-mouseenter="task.nameButtons = true" ng-mouseleave="task.nameButtons = false"
+            h4.vertical-centered editable-text="task.name" e-form="taskNameForm" onbeforesave="updateTaskName($data, task)" blur="submit" e-maxlength="50" ng-init="task.oldName = task.name"
+              | {{task.name}}
+              span.glyphicon.glyphicon-pencil ng-click="toggleXEditMode(taskNameForm)" ng-show="!editEnabled(taskNameForm) && task.nameButtons && displayed(task)"
+          span.glyphicon.glyphicon-record.col-xs-2 ng-hide="done(task)"
+          span.glyphicon.glyphicon-ok-circle.col-xs-2 ng-show="done(task)"
+        span ng-if="!task.editMode && displayed(task)" ng-click="$event.stopPropagation()"
+          div.body.row
+            div.content.col-xs-12 ng-mouseenter="task.descriptionButtons = true" ng-mouseleave="task.descriptionButtons = false"
+              div editable-textarea="task.description" e-form="taskDescriptionForm" onbeforesave="updateTaskDescription($data, task)" buttons="no" blur="submit" e-maxlength="2000" ng-init="task.oldDescription = task.description"
+                | {{task.description}}
+                span ng-show="!editEnabled(taskDescriptionForm) && task.descriptionButtons"
+                  span.glyphicon.glyphicon-pencil ng-click="toggleXEditMode(taskDescriptionForm)"
+            div.col-xs-12
+              | Next Due Date: {{task.next_due_date | date: 'M/d/yy'}}
+          div.footer.row
+            div.btn-group.col-xs-10
+              button.btn.btn-default ng-repeat="option in repeat_by_options" type="button" ng-class="{active: task.repeat_by == option}" ng-click="updateTaskRepeat(task, option)"
+                | {{option}}
+            div.col-xs-2
+              span.glyphicon.glyphicon-trash ng-click="deleteTask(task)"

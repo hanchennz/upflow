@@ -1,8 +1,8 @@
 @import "variables"
 
 body
+  background: url(http://iloveyounonetheless.files.wordpress.com/2010/07/e4ba7dee-fe33-4118-bbe6-5a3d7b9342d1.jpeg) no-repeat center center fixed
   background-color: $background-color-darker-grey
-  background: url(images/background.jpg) no-repeat center center fixed
   font-family: 'Source Sans Pro', sans-serif
 
 .btn-group > .btn
@@ -22,14 +22,25 @@ body
   margin-right: 0
 
 =color($color, $darkcolor)
-  background-color: #{$color}
-  .header div, .content
-    background-color: #{$color}
   .btn-group > .btn-default
     color: white
     background-color: #{$color}
     &.active
       background-color: #{$darkcolor}
+
+  &::after
+    background-color: #{$color}
+    content: ''
+    opacity: 0.7
+    position: absolute
+    z-index: -1
+    left: 0
+    right: 0
+    top: 0
+    bottom: 0
+
+  &.active::after
+    opacity: 1
 
 div.blue
   @include color($blue, $darker-blue)
@@ -48,8 +59,9 @@ div.green
 
 div.task
   margin: 0.6rem 0
-  border: 1px solid grey
-  box-shadow: 0px 0px 1px 0px lightgrey
+  box-shadow: 0px 0px 1px 0px grey
+  position: relative
+  color: white
 
   .header
     position: relative
@@ -63,7 +75,6 @@ div.task
 
       h4
         margin: 0
-        color: white
         font-weight: 600
 
     span
@@ -78,7 +89,6 @@ div.task
         right: 35%
 
   .content
-    color: white
     min-height: 5rem
 
   .glyphicon
@@ -114,26 +124,6 @@ div.task
   .reduced-content
     padding-top: 0.5rem
 
-  input[type="text"], textarea, .task-input
-    border: none
-    margin: 0
-    padding: 0
-    width: 100%
-
-    &:focus
-      box-shadow: none
-      outline: none
-
-  input[type="text"], .task-input
-    font-size: 1.8rem
-    border-radius: 0
-
-  textarea
-    border: 1px solid transparent
-    border-radius: 0.3rem
-    min-height: 8rem
-    resize: vertical
-
   .task-input
     padding-top: 0.5rem
     margin-bottom: 0.4rem
@@ -162,6 +152,26 @@ div.task
 
   .non-x-edit
     padding: 0
+
+input[type="text"], textarea, .task-input
+  border: none
+  margin: 0
+  padding: 0
+  width: 100%
+
+  &:focus
+    box-shadow: none
+    outline: none
+
+input[type="text"], .task-input
+  font-size: 1.8rem
+  border-radius: 0
+
+textarea
+  border: 1px solid transparent
+  border-radius: 0.3rem
+  min-height: 8rem
+  resize: vertical
 
 .glyphicon
   font-size: 1.5rem
