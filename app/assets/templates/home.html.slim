@@ -16,7 +16,7 @@ div.row
                 | {{option}}
           div.col-xs-2
             button.btn.btn-success.pull-right type="submit" Create Task
-    div.check-in ng-repeat="newCheckIn in newCheckInList | filter:search" ng-if="search.task_id"
+    div.check-in ng-repeat="newCheckIn in newCheckInList | filter:search:true" ng-if="search.task_id"
       form ng-submit="saveCheckIn(newCheckIn)"
         div.row
           div.col-md-9.col-xs-8
@@ -29,7 +29,7 @@ div.row
             textarea.non-x-edit ng-model="newCheckIn.note" placeholder="What did you do today?" maxlength="2000" required=""
           div.col-md-12
             button.btn.btn-success.pull-right type="submit" Check In
-    div.check-in.row.check-in-animate ng-repeat="checkIn in checkInList | filter:search | orderBy:'created_at':true" autoscroll=""
+    div.check-in.row.check-in-animate ng-repeat="checkIn in checkInList | filter:search:true | orderBy:'created_at':true" autoscroll=""
       div.row
         div.col-md-9.col-xs-8
           h4.check-in-name-animate ng-if="search.task_id != checkIn.task_id"
@@ -52,7 +52,6 @@ div.row
             h4.vertical-centered editable-text="task.name" e-form="taskNameForm" onbeforesave="updateTaskName($data, task)" blur="submit" e-maxlength="50" ng-init="task.oldName = task.name"
               | {{task.name}}
               span.glyphicon.glyphicon-pencil ng-click="toggleXEditMode(taskNameForm)" ng-show="!editEnabled(taskNameForm) && task.nameButtons && displayed(task)"
-          span.glyphicon.glyphicon-record.col-xs-2 ng-hide="done(task)"
           span.glyphicon.glyphicon-ok-circle.col-xs-2 ng-show="done(task)"
         span ng-if="!task.editMode && displayed(task)" ng-click="$event.stopPropagation()"
           div.body.row

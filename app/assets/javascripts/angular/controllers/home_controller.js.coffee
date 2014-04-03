@@ -1,4 +1,4 @@
-@upflow.controller 'HomeController', ($scope, CheckIn, Session, Task) ->
+HomeController = @upflow.controller 'HomeController', ($scope, CheckIn, Session, Task) ->
 
   Session.getUser (user) ->
     $scope.currentUser = user
