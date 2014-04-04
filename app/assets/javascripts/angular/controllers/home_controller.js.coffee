@@ -115,5 +115,3 @@ HomeController = @upflow.controller 'HomeController', ($scope, CheckIn, Session,
     , (error) ->
       checkIn.note = checkIn.oldNote
       console.log('There was an error in updating the check in')
-
-HomeController.$inject = ['$scope', 'CheckIn', 'Session', 'Task']
