@@ -21,4 +21,5 @@
 //= require turbolinks
 //= require underscore
 //= require xeditable
-//= require_tree .
+//= require ui-bootstrap-tpls-0.10.0.min
+//= require_tree ./angular
