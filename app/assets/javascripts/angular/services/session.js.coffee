@@ -1,4 +1,4 @@
-@upflow.factory 'Session', ($resource) ->
+upflow.factory 'Session', ($resource) ->
   service = $resource '/api/users/:action.json', { action: '@action' },
     current: { method: 'GET', params: { action: 'current'} }
 

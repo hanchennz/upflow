@@ -1,4 +1,4 @@
-@upflow.controller( 'LoginController', ($scope, $http) ->
+upflow.controller( 'LoginController', ($scope, $http) ->
   $scope.login_user =
     email: null
     password: null

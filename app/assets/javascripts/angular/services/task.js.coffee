@@ -1,4 +1,4 @@
-@upflow.factory 'Task', ($resource) ->
+upflow.factory 'Task', ($resource) ->
   service = $resource(
     '/api/tasks/:id.json',
     {
