@@ -3,6 +3,7 @@ class Api::CheckInsController < ApplicationController
 
   def create
     @check_in = CheckIn.new(permitted_params)
+    puts 'here'
     if @check_in.save
       render 'show', status: :created
     else
@@ -54,6 +55,7 @@ class Api::CheckInsController < ApplicationController
         user_id: params[:user_id],
         task_type: 'one_off'
       )
+      puts 'create_task'
       params[:check_in][:task_id] = @new_task.id
     end
   end
