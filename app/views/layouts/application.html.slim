@@ -3,8 +3,9 @@ html
   head
     link href='http://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600,700,300italic,400italic,700italic' rel='stylesheet' type='text/css'
     title Upflow
+    = favicon_link_tag 'favicon.ico'
     = stylesheet_link_tag 'application', media: 'all'
-    = csrf_meta_tags
+    = javascript_include_tag 'jquery'
   body
     #content.selected.container
       = yield
