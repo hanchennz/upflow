@@ -18,7 +18,7 @@
 //= require jquery_ujs
 //= require ng-rails-csrf
 //= require turbolinks
+//= require ui-bootstrap-tpls-0.10.0.min
 //= require underscore
 //= require xeditable
-//= require ui-bootstrap-tpls-0.10.0.min
 //= require_tree ./angular
