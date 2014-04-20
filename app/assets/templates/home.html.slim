@@ -52,7 +52,8 @@ div.row
             h4.vertical-centered editable-text="task.name" e-form="taskNameForm" onbeforesave="updateTaskName($data, task)" blur="submit" e-maxlength="50" ng-init="task.oldName = task.name"
               | {{task.name}}
               span.glyphicon.glyphicon-pencil ng-click="toggleXEditMode(taskNameForm)" ng-show="!editEnabled(taskNameForm) && task.nameButtons && displayed(task)"
-          span.glyphicon.glyphicon-ok-circle.col-xs-2 ng-show="done(task)"
+          span.glyphicon.glyphicon-chevron-down.col-xs-2 ng-show="displayed(task)"
+          span.glyphicon.glyphicon-chevron-up.col-xs-2 ng-show="!displayed(task)"
         span ng-if="!task.editMode && displayed(task)" ng-click="$event.stopPropagation()"
           div.body.row
             div.content.col-xs-12 ng-mouseenter="task.descriptionButtons = true" ng-mouseleave="task.descriptionButtons = false"

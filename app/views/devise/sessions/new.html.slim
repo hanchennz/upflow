@@ -1,18 +1,38 @@
-div
-  header.section-header
-    h1 = t('.title')
-  div
-    = form_for resource, as: resource_name, url: session_path(resource_name) do |f|
-      fieldset
-        div
-          = f.label :email
-        div
-          = f.email_field :email
-        div
-          = f.label :password
-        div
-          = f.password_field :password
-        div
-          = f.button t('.submit')
-  section
-    = link_to t('.forgot_password'), new_user_password_path(resource)
+div.landing-page
+  div.row
+    header.site-title.title.col-xs-12.col-md-9
+      h1
+        span.main-title Welcome to Upflow
+      h2
+        span.by-line A new way to get things done
+    div.devise-panel.pull-right.col-xs-12.col-md-3
+      div.background
+      div.content
+        section
+          div.panel-title
+            = t('.Login')
+          = form_for resource, as: resource_name, url: session_path(resource_name) do |f|
+            fieldset
+              div
+                = f.email_field :email, placeholder: 'Email'
+              div
+                = f.password_field :password, placeholder: 'Password'
+              div.right-aligned
+                = f.button t('.enter'), class: 'btn btn-success'
+        section.link
+          = link_to t('.forgot_your_password?'), new_user_password_path(resource)
+        section.link
+          = link_to t('.sign_up_now'), new_registration_path(resource_name)
+  div.row
+    div.col-xs-12.col-md-4.story-panel
+      img src="../assets/test.jpg" style="max-width:100%"
+      div.story-content
+        | Keep a running record of everything you've done.
+    div.col-xs-12.col-md-4.story-panel
+      img src="../assets/test.jpg" style="max-width:100%"
+      div.story-content
+        | Make incremental progress towards your bigger goals.
+    div.col-xs-12.col-md-4.story-panel
+      img src="../assets/test.jpg" style="max-width:100%"
+      div.story-content
+        | Prioritize your daily tasks so you can stay energized and focused.

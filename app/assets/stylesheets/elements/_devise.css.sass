@@ -1,0 +1,79 @@
+body
+  background: url(http://farm5.staticflickr.com/4123/4769294947_e377a79b3e_o.jpg) no-repeat center center fixed
+
+.landing-page
+  position: fixed
+  height: 80%
+  width: 80%
+  top: 20%
+  left: 10%
+  padding: 10px
+
+header.site-title
+  span.main-title, span.by-line
+    color: white
+    background: $green
+    padding: 0.4rem 1.2rem
+  
+  .main-title
+    font-size: 6rem
+
+div.devise-panel
+  padding-top: 1rem
+  padding-bottom: 1rem
+
+  div.background
+    background-color: $green
+    opacity: 1
+    position: absolute
+    height: 100%
+    width: 100%
+    z-index: -1
+    left: 0
+    top: 0
+
+  div.content
+    font-size: 1.8rem
+
+    div.panel-title
+      text-align: center
+      font-size: 3rem
+      color: white
+
+    div
+      margin-bottom: 0.4rem
+
+    input
+      width: 100%
+      border: none
+      margin: 0 0 0.4rem 0
+      padding: 0.5rem
+      border-bottom: 1px solid transparent
+      transition: .5s linear
+
+      &:focus
+        transition: .5s linear
+        border-bottom: 1px solid lightgrey
+        box-shadow: none
+        outline: none
+
+    input:-webkit-autofill
+      -webkit-box-shadow: 0 0 0px 1000px white inset
+
+    .btn.btn-success
+      font-size: 1.8rem
+      width: 100%
+      background-color: $blue
+
+    section.link
+      text-align: right
+      font-size: 1.6rem
+      a
+        color: white
+
+div.story-panel
+  padding-top: 4rem
+
+  .story-content
+    background-color: white
+    padding: 1rem
