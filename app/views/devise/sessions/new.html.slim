@@ -1,38 +1,45 @@
 div.landing-page
   div.row
-    header.site-title.title.col-xs-12.col-md-9
+    header.site-title.title.col-xs-12.col-md-8.col-lg-9
       h1
         span.main-title Welcome to Upflow
       h2
         span.by-line A new way to get things done
-    div.devise-panel.pull-right.col-xs-12.col-md-3
-      div.background
-      div.content
-        section
-          div.panel-title
-            = t('.Login')
-          = form_for resource, as: resource_name, url: session_path(resource_name) do |f|
-            fieldset
-              div
-                = f.email_field :email, placeholder: 'Email'
-              div
-                = f.password_field :password, placeholder: 'Password'
-              div.right-aligned
-                = f.button t('.enter'), class: 'btn btn-success'
-        section.link
-          = link_to t('.forgot_your_password?'), new_user_password_path(resource)
-        section.link
-          = link_to t('.sign_up_now'), new_registration_path(resource_name)
+    div.col-xs-12.col-md-4.col-lg-3
+      div.devise-panel
+        div.background
+        div.content
+          section
+            div.panel-title
+              = t('.Login')
+            = form_for resource, as: resource_name, url: session_path(resource_name) do |f|
+              fieldset
+                div
+                  = f.email_field :email, placeholder: 'Email'
+                div
+                  = f.password_field :password, placeholder: 'Password'
+                div.right-aligned
+                  = f.button t('.enter'), class: 'btn btn-success'
+          section.link
+            = link_to t('.forgot_your_password?'), new_user_password_path(resource)
+          section.link
+            = link_to t('.sign_up_now'), new_registration_path(resource_name)
   div.row
     div.col-xs-12.col-md-4.story-panel
-      img src="../assets/test.jpg" style="max-width:100%"
-      div.story-content
-        | Keep a running record of everything you've done.
+      div
+        img src="../assets/image_3.png" style="max-width:80%"
+        div.story-content
+          p.story-byline The Done List
+          p Good things take time. Celebrate the small victories and feel accomplished at the end of the day, even if you didn't cross that big project off your list.
     div.col-xs-12.col-md-4.story-panel
-      img src="../assets/test.jpg" style="max-width:100%"
-      div.story-content
-        | Make incremental progress towards your bigger goals.
+      div
+        img src="../assets/image_2.png" style="max-width:80%"
+        div.story-content
+          p.story-byline Go With The Flow
+          p Stay focused on solving the problem, not wasting time creating sub-tasks to cross off. Situations and priorities change every day, your to-dos should do the same.
     div.col-xs-12.col-md-4.story-panel
-      img src="../assets/test.jpg" style="max-width:100%"
-      div.story-content
-        | Prioritize your daily tasks so you can stay energized and focused.
+      div
+        img src="../assets/image_1.png" style="max-width:80%"
+        div.story-content
+          p.story-byline Stay On Top
+          p Keep tabs on future deadlines and long running conversations before they get out of control. Upflow reminds you to regularly check in on tasks you might otherwise forget.

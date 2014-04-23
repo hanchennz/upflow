@@ -31,15 +31,17 @@ class Task < ActiveRecord::Base
   validates :task_type, presence: true
 
   def last_check_in
-    if check_ins.last.nil?
-      created_at
-    else
+    if check_ins.any?
       check_ins.last.created_at
     end
   end
 
   def next_due_date
-    last_check_in + self.repeat_by.days
+    if last_check_in.nil?
+      created_at + self.repeat_by.days
+    else
+      last_check_in + self.repeat_by.days
+    end
   end
 
   def update_colors
