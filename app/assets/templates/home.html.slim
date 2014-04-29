@@ -45,8 +45,8 @@ div.row.app
         div.date.col-md-3.col-xs-4.text-right ng-if="search.task_id == checkIn.task_id"
           | {{checkIn.created_at | date: 'EEEE, MMMM d, y'}}
   div.col-md-4
-    div ng-repeat="task in taskList | orderBy:['rank', 'repeat_by']" ng-click="toggleDisplay(task)" autoscroll=""
-      div.task class="{{task.color}}" ng-class="{active: displayed(task) || !done(task)}"
+    div.task-animate ng-repeat="task in taskList | orderBy:['rank', 'repeat_by']" ng-click="toggleDisplay(task)" autoscroll=""
+      div.task class="{{task.color}}" ng-class="{active: displayed(task) || !done(task), displayed: displayed(task)}"
         div.row.header ng-if="!task.editMode"
           div.col-xs-10.vertical-parent ng-mouseenter="task.nameButtons = true" ng-mouseleave="task.nameButtons = false"
             h4.vertical-centered editable-text="task.name" e-form="taskNameForm" onbeforesave="updateTaskName($data, task)" blur="submit" e-maxlength="50" ng-init="task.oldName = task.name"

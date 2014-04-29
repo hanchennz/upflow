@@ -41,6 +41,9 @@ body
   &.active::after
     opacity: 1
 
+  &.displayed
+    box-shadow: 0 0 10px 5px $blue
+
 div.blue
   @include color($blue, $darker-blue)
 
@@ -55,105 +58,6 @@ div.yellow
 
 div.green
   @include color($green, $darker-green)
-
-div.task
-  margin: 0.6rem 0
-  box-shadow: 0px 0px 1px 0px grey
-  position: relative
-  color: white
-
-  .header
-    position: relative
-    min-height: 5rem
-
-    .glyphicon
-      font-size: 2rem
-
-    div
-      position: absolute
-      top: 0
-      left: 0
-      height: 100%
-
-      h4
-        margin: 0
-        font-weight: 600
-
-    span
-      position: absolute
-      right: 0
-      top: 0
-      height: 100%
-
-      &:before
-        position: absolute
-        top: 30%
-        right: 35%
-
-  .content
-    min-height: 5rem
-
-  .glyphicon
-    color: white
-    top: 0.8rem
-
-  .footer
-    text-align: center
-    padding: 1rem 0
-
-  .editable-wrap,
-  .editable-controls,
-  .editable-input
-    width: 100%
-
-.check-in
-  background: white
-  border-top: 1px solid lightgrey
-  margin: 0
-  padding: 1rem 0
-  position: relative
-  min-height: 5rem
-
-  h4
-    padding: 0.8rem 0 0.7rem 0
-    margin: 0
-
-  .editable-wrap,
-  .editable-controls,
-  .editable-input
-    width: 100%
-
-  .reduced-content
-    padding-top: 0.5rem
-
-  .task-input
-    padding-top: 0.5rem
-    margin-bottom: 0.4rem
-    border-bottom: 1px solid transparent
-    transition: .5s linear
-    &:focus
-      transition: .5s linear
-      border-bottom: 1px solid lightgrey
-
-  .date
-    padding: 0.5rem 1rem
-    background: $blue
-    color: white
-
-  .btn-group > .btn-default
-    color: lightgrey
-    &.active
-      background: $green
-      color: white
-
-  .repeat-by
-    color: grey
-
-  span, div.note
-    white-space: pre-wrap
-
-  .non-x-edit
-    padding: 0
 
 input[type="text"], textarea, .task-input
   border: none

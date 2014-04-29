@@ -1,23 +1,24 @@
 div.landing-page
-  div.row
-    header.site-title.title.col-xs-12.col-md-9
+  div.row.login-info
+    header.site-title.title.col-xs-12.col-md-8.col-lg-9
       h1
         span.main-title Welcome to Upflow
       h2
-        span.by-line A new way to get things done
-    div.devise-panel.pull-right.col-xs-6.col-md-3
-      div.background
-      div.content
-        section
-          div.panel-title
-            = t('.sign_up')
-          = form_for resource, as: resource_name, url: registration_path(resource_name) do |f|
-            fieldset
-              div
-                = f.email_field :email, placeholder: 'What\'s your email?'
-              div
-                = f.password_field :password, placeholder: 'Choose a password'
-              div
-                = f.password_field :password_confirmation, placeholder: 'Confirm password'
-              div
-                = f.button t('.register'), class: 'btn btn-success'
+        span.by-line Simplified to-do lists for lazy people
+    div.col-xs-12.col-md-4.col-lg-3
+      div.account-panel
+        div.background
+        div.content
+          section
+            div.panel-title
+              = t('.sign_up')
+            = form_for resource, as: resource_name, url: registration_path(resource_name) do |f|
+              fieldset
+                div
+                  = f.email_field :email, placeholder: 'What\'s your email?'
+                div
+                  = f.password_field :password, placeholder: 'Choose a password'
+                div
+                  = f.password_field :password_confirmation, placeholder: 'Confirm password'
+                div
+                  = f.button t('.register'), class: 'btn btn-success'

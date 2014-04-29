@@ -1,14 +1,6 @@
 body
   background: url(http://farm5.staticflickr.com/4123/4769294947_e377a79b3e_o.jpg) no-repeat center center fixed
 
-.landing-page
-  position: fixed
-  height: 80%
-  width: 80%
-  top: 15%
-  left: 10%
-  padding: 10px
-
 header.site-title
   span.main-title, span.by-line
     color: white
@@ -18,77 +10,88 @@ header.site-title
   .main-title
     font-size: 6rem
 
-div.devise-panel
-  padding: 2rem
-  background-color: $green
+div.login-info
+  margin-top: 20rem
+  margin-bottom: 20rem
 
-  div.background
-    opacity: 1
-    position: absolute
-    height: 100%
-    width: 100%
-    z-index: -1
-    left: 0
-    top: 0
+  .account-panel
+    padding: 2rem
+    background-color: $green
 
-  div.content
-    font-size: 1.8rem
-
-    div.panel-title
-      text-align: center
-      font-size: 3rem
-      color: white
-
-    div
-      margin-bottom: 0.4rem
-
-    input
+    div.background
+      opacity: 1
+      position: absolute
+      height: 100%
       width: 100%
-      border: none
-      margin: 0 0 0.4rem 0
-      padding: 0.5rem
-      border-bottom: 1px solid transparent
-      transition: .5s linear
+      z-index: -1
+      left: 0
+      top: 0
 
-      &:focus
-        transition: .5s linear
-        border-bottom: 1px solid lightgrey
-        box-shadow: none
-        outline: none
-
-    input:-webkit-autofill
-      -webkit-box-shadow: 0 0 0px 1000px white inset
-
-    .btn.btn-success
+    div.content
       font-size: 1.8rem
-      width: 100%
-      background-color: $blue
 
-    section.link
-      text-align: right
-      font-size: 1.6rem
-      a
+      div.panel-title
+        text-align: center
+        font-size: 3rem
         color: white
 
-div.story-panel
-  margin-top: 4rem
-  padding: 0 2.5rem
+      div
+        margin-bottom: 0.4rem
 
-  div
-    background-color: white
-    padding-top: 1rem
+      input
+        width: 100%
+        border: none
+        margin: 0 0 0.4rem 0
+        padding: 0.5rem
+        border-bottom: 1px solid transparent
+        transition: .5s linear
 
-    .story-content
-      padding: 1rem
-      text-align: center
+        &:focus
+          transition: .5s linear
+          border-bottom: 1px solid lightgrey
+          box-shadow: none
+          outline: none
 
-      .story-byline
-        font-size: 2rem
+      input:-webkit-autofill
+        -webkit-box-shadow: 0 0 0px 1000px white inset
 
-    img
-      margin-left: auto
-      margin-right: auto
-      display: block
-      background-color: white
-      -webkit-clip-path: circle(50%, 50%, 35%)
-      clip-path: circle(50%, 50%, 25%)
+      .btn.btn-success
+        font-size: 1.8rem
+        width: 100%
+        background-color: $blue
+
+      section.link
+        text-align: right
+        font-size: 1.6rem
+        a
+          color: white
+
+div.story-section
+  background-color: white
+  text-align: center
+  margin-top: 20rem
+  margin-bottom: 20rem
+
+  .welcome-blurb
+    font-size: 4rem
+    padding: 1rem 0
+
+  .story-panel
+    padding: 0 2.5rem
+
+    div
+      padding-top: 1rem
+
+      .story-content
+        padding: 1rem
+
+        .story-byline
+          font-size: 2rem
+
+      img
+        margin-left: auto
+        margin-right: auto
+        display: block
+        background-color: white
+        -webkit-clip-path: circle(50%, 50%, 35%)
+        clip-path: circle(50%, 50%, 25%)

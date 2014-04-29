@@ -1,12 +1,12 @@
 div.landing-page
-  div.row
+  div.row.login-info
     header.site-title.title.col-xs-12.col-md-8.col-lg-9
       h1
         span.main-title Welcome to Upflow
       h2
-        span.by-line A new way to get things done
+        span.by-line Simplified to-do lists for lazy people
     div.col-xs-12.col-md-4.col-lg-3
-      div.devise-panel
+      div.account-panel
         div.background
         div.content
           section
@@ -24,7 +24,9 @@ div.landing-page
             = link_to t('.forgot_your_password?'), new_user_password_path(resource)
           section.link
             = link_to t('.sign_up_now'), new_registration_path(resource_name)
-  div.row
+  div.row.story-section
+    div.welcome-blurb
+      | Spend less time creating tasks, and more time getting things done.
     div.col-xs-12.col-md-4.story-panel
       div
         img src="../assets/image_3.png" style="max-width:80%"
@@ -42,4 +44,4 @@ div.landing-page
         img src="../assets/image_1.png" style="max-width:80%"
         div.story-content
           p.story-byline Stay On Top
-          p Keep tabs on future deadlines and long running conversations before they get out of control. Upflow reminds you to regularly check in on tasks you might otherwise forget.
+          p Upflow reminds you to check in future deadlines and long running conversations at regular intervals, before they get out of control.
