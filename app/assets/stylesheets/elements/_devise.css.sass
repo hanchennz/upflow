@@ -1,5 +1,17 @@
 body
-  background: url(http://farm5.staticflickr.com/4123/4769294947_e377a79b3e_o.jpg) no-repeat center center fixed
+  background: url('unblurred_background.jpg') no-repeat center fixed
+  background-size: 100%
+
+  &::before
+    background-color: black
+    content: ''
+    opacity: 0.3
+    position: fixed
+    z-index: -1
+    left: 0
+    right: 0
+    top: 0
+    bottom: 0
 
 header.site-title
   span.main-title, span.by-line
