@@ -3,7 +3,7 @@ source 'https://rubygems.org'
 ruby '2.0.0'
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
-gem 'rails', '4.0.2'
+gem 'rails', '4.1.1'
 
 gem 'pg'
 
@@ -60,7 +60,6 @@ gem 'compass-rails', '~> 1.1.2'
 gem 'devise'
 gem 'enumerize'
 gem 'ng-rails-csrf'
-gem 'oj'
 gem 'paper_trail', '~> 3.0.0'
 gem 'paranoia', '~> 2.0'
 gem 'rabl'
