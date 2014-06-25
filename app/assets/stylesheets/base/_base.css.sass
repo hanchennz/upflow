@@ -1,6 +1,17 @@
+html
+  height: 100%
+
 body
   background-color: $background-color-darker-grey
   font-family: 'Source Sans Pro', sans-serif
+  height: 100%
+  margin: 0
+
+#content
+  margin: 0
+  padding: 0
+  height: 100%
+  width: 100%
 
 .btn-group > .btn
   margin: 0 0.1rem
@@ -17,6 +28,12 @@ body
 .row
   margin-left: 0
   margin-right: 0
+
+@mixin transition($time)
+  -webkit-transition: $time ease-in-out
+  -moz-transition: $time ease-in-out
+  -o-transition: $time ease-in-out
+  transition: $time ease-in-out
 
 =color($color, $darkcolor)
   .btn-group > .btn-default

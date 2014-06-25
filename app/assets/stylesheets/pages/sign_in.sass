@@ -1,0 +1,153 @@
+.pane
+  display: table
+  margin: 0 auto
+  padding: 0
+  height: 100%
+  width: 100%
+  text-align: center
+
+  font-size: 1.4rem
+  line-height: 2.4rem
+  text-align: center
+  color: black
+
+#log-in, #story-section, #about
+  display: table-cell
+  vertical-align: middle
+  position: relative
+  color: white
+  padding: 0 10%
+
+#learn-more, #about-link, #back-to-top
+  margin: 3rem 0
+
+  a
+    padding: 0.5rem 1rem
+    font-size: 2.4rem
+    color: white
+    background: rgba(0, 0, 0, 0.8)
+
+    &:hover
+      @include transition(0.3s)
+      color: white
+      background: $green
+      text-decoration: none
+
+#log-in
+  background-image: url('background_bright.jpg')
+  background-size: cover
+  background-attachment: fixed
+  text-align: center
+
+  #site-title
+    h1, h2, #learn-more
+      margin: 3rem 0
+
+    #main-title, #by-line
+      color: white
+      background: $green
+      padding: 0.4rem 1.2rem
+    
+    #main-title
+      font-size: 6rem
+      line-height: 6rem
+
+  #account-panel
+    padding: 2rem
+    background-color: $green
+    max-width: 25rem
+    margin: 0 auto
+
+    .content
+      font-size: 1.4rem
+
+      .panel-title
+        text-align: center
+        font-size: 3rem
+        padding-bottom: 2rem
+        color: white
+
+      div
+        margin-bottom: 0.4rem
+
+      input
+        width: 100%
+        border: none
+        margin: 0 0 0.4rem 0
+        padding: 0.5rem
+        border-bottom: 1px solid transparent
+        transition: .5s linear
+        text-align: center
+
+        &:focus
+          transition: .5s linear
+          border-bottom: 1px solid lightgrey
+          box-shadow: none
+          outline: none
+
+      input:-webkit-autofill
+        -webkit-box-shadow: 0 0 0px 1000px white inset
+
+      .btn.btn-success
+        font-size: 1.8rem
+        width: 100%
+        background-color: $blue
+
+      section.link
+        font-size: 1.6rem
+        a
+          color: white
+
+#story-section
+  .welcome-blurb
+    font-size: 4rem
+    color: $green
+    line-height: 3rem
+    padding: 2rem 0
+
+  .story-panel
+    padding: 0 2.5rem
+
+    div
+      padding-top: 1rem
+
+      .story-content
+        padding: 1rem
+
+        p.story-byline
+          font-size: 2rem
+
+      #image-1
+        background-image: url('image_1.png')
+
+      #image-2
+        background-image: url('image_2.png')
+
+      #image-3
+        background-image: url('image_3.png')
+
+      #image-1, #image-2, #image-3
+        background-size: cover
+        margin-left: auto
+        margin-right: auto
+        display: block
+        width: 24rem
+        height: 24rem
+        background-color: white
+        border-radius: 50%
+        border: $green 5px solid
+
+  #about-link a
+    color: $green
+
+#about
+  background: rgba(0, 0, 0, 0.2)
+  background-image: url('background_dark.jpg')
+  background-size: cover
+  background-attachment: fixed
+
+  #about-panel
+    padding: 2rem
+    max-width: 60rem
+    margin: 0 auto
+    background: rgba(0, 0, 0, 0.8)
