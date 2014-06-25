@@ -4,7 +4,7 @@
       h1
         span#main-title Welcome to Upflow
       h2
-        span#by-line A lazy to-do list for busy people.
+        span#by-line A done-list for busy people.
     #account-panel
       .content
         section
@@ -20,37 +20,43 @@
                 = f.button t('.enter'), class: 'btn btn-success'
         section.link
           = link_to t('.forgot_your_password?'), new_user_password_path(resource)
-        section.link
-          = link_to t('.create_account'), new_registration_path(resource_name)
+    #create-account
+      a href="/users/sign_up" Create Account
     #learn-more
       a href="javascript:void(0)" Learn More
 .pane
   #story-section
     div.welcome-blurb
-      | Spend less time creating tasks, and more time getting things done.
+      | Spend less time creating to-dos, and more time getting things done.
     .story-panel.col-xs-12.col-md-4
       div
+        p.story-byline 1. Create Tasks
         #image-1
         div.story-content
-          p.story-byline The Done List
-          p Good things take time. Celebrate the small victories and feel accomplished at the end of the day, even if you didn't cross that big project off your list.
+          p Good things take time; incremental effort is key. Upflow's tasks will remind you if they've been neglected, even if the due date is weeks away. 
     .story-panel.col-xs-12.col-md-4
       div
+        p.story-byline 2. Check In
         #image-2
         div.story-content
-          p.story-byline Go With The Flow
-          p Stay focused on solving the problem, not wasting time creating sub-tasks to cross off. Situations and priorities change every day, your to-dos should do the same.
+          p Use check ins to track each step you take towards your goal, without the need for redundant sub-tasks. Let your small wins get you into the flow.
     .story-panel.col-xs-12.col-md-4
       div
+        p.story-byline 3. Stay in the Flow
         #image-3
         div.story-content
-          p.story-byline Stay On Top
-          p Upflow reminds you to check in future deadlines and long running conversations at regular intervals, before they get out of control.
+          p Whether its a single project or a single day, Upflow helps you recall all the relevent information you need to help you focus on your next move.
     #about-link.col-xs-12
       a href="javascript:void(0)" About
 .pane
   #about
     #about-panel
-      | Bent double, like old beggars under sacks. Knock kneed, coughing like hags, we cursed through sludge. Till on the haunting flares we turned out backs, and towards our distant rest began to troudge. Men marched asleep. 
+      div
+        | Upflow is a task tracking 'methodology' that I developed during my time in consulting. It started as a Google Spreadsheet where I managed conversations, deliverables and personal goals that often took many months to come to fruition. It helped me to juggle priorities and stay focused on getting the next thing done.
+      br
+      div
+        | If you have suggestions or comments, I can be reached at 
+        a href="mailto:upflow.io@gmail.com?Subject=Upflow" target="_blank" upflow.io@gmail.com
+        | . Photo credit goes to E. Huybrechts.
     #back-to-top
       a href="javascript:void(0)" Create Account

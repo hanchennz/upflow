@@ -1,0 +1,22 @@
+.pane
+  #log-in
+    #site-title
+      h1
+        span#main-title Welcome to Upflow
+      h2
+        span#by-line A lazy to-do list for busy people.
+    #account-panel
+      .content
+        section
+          div.panel-title
+            = t('.password_reset')
+          = form_for(resource, :as => resource_name, :url => password_path(resource_name), :html => { :method => :post }) do |f|
+            fieldset
+              div
+                =  f.email_field :email, :autofocus => true, placeholder: 'What\'s your email?'
+              div
+                = f.button t('.reset_password'), class: 'btn btn-success'
+    #log-in-button
+      a href="/" Log In
+    #create-account-button
+      a href="/" Create Account

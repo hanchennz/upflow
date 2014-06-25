@@ -4,12 +4,12 @@ $(document).ready ->
       scrollTop: $('#story-section').offset().top
     , 500)
 
-  $('#about-link').click (event) ->
+  $('#about-link a').click (event) ->
     $('html, body').animate(
       scrollTop: $('#about').offset().top
     , 500)
 
-  $('#back-to-top').click (event) ->
+  $('#back-to-top a').click (event) ->
     $('html, body').animate(
       scrollTop: $('#log-in').offset().top
     , 500)

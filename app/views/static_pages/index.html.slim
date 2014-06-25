@@ -6,7 +6,7 @@ html ng-app="upflow"
     = stylesheet_link_tag 'application'
     = javascript_include_tag 'application'
     = csrf_meta_tags
-  meta content="width=device-width"
+  meta name="viewport" content="width=device-width; height=device-height"
   body
     header.mastheader ng-include="'#{asset_path('master/_header.html')}'"
     div#content.selected.container ng-view="" autoscroll="true"
