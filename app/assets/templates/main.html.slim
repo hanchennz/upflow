@@ -9,14 +9,14 @@
       a href="/users/sign_out" target="_self" Logout
   #tasks.col-md-4
     div.task-animate ng-repeat="task in taskList | orderBy:['rank', 'repeat_by']" ng-click="toggleDisplay(task)"
-      div.task class="{{task.color}}" ng-class="{displayed: displayed(task)}"
+      div.task class="{{task.color}}"
         div.row.header ng-if="!task.editMode"
           div.col-xs-10.vertical-parent
             h4.vertical-centered editable-text="task.name" e-form="taskNameForm" onbeforesave="updateTaskName($data, task)" blur="submit" e-maxlength="50" ng-init="task.oldName = task.name"
               | {{task.name}}
           span.glyphicon.glyphicon-chevron-down.col-xs-2 ng-show="displayed(task)"
           span.glyphicon.glyphicon-chevron-up.col-xs-2 ng-show="!displayed(task)"
-        span ng-if="!task.editMode && displayed(task)" ng-click="$event.stopPropagation()"
+        div.task-content ng-show="!task.editMode && displayed(task)" ng-click="$event.stopPropagation()"
           div.body.row
             div.content.col-xs-12
               div.col-xs-10 editable-textarea="task.description" e-form="taskDescriptionForm" onbeforesave="updateTaskDescription($data, task)" buttons="no" blur="submit" e-maxlength="2000" ng-init="task.oldDescription = task.description"
