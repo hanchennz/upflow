@@ -26,6 +26,7 @@
     font-size: 2.4rem
     color: white
     background: rgba(0, 0, 0, 0.8)
+    @include transition(0.3s)
 
     &:hover
       @include transition(0.3s)
@@ -90,9 +91,13 @@
         -webkit-box-shadow: 0 0 0px 1000px white inset
 
       .btn.btn-success
+        @include transition(0.3s)
         font-size: 1.8rem
         width: 100%
-        background-color: $blue
+        background: $blue
+
+        &:focus
+          outline: none
 
       section.link
         font-size: 1.6rem
@@ -142,7 +147,7 @@
         height: 24rem
         background-color: white
         border-radius: 50%
-        border: $green 5px solid
+        border: $green 0.4rem solid
 
     .number
       position: absolute

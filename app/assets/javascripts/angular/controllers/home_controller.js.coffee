@@ -1,9 +1,11 @@
-upflow.controller 'HomeController', ($scope, CheckIn, Session, Task) ->
+upflow.controller 'HomeController', ($scope, $timeout, CheckIn, Session, Task) ->
 
   Session.getUser (user) ->
     $scope.currentUser = user
-    $scope.taskList = Task.index(user_id: user.id)
-    $scope.checkInList = CheckIn.queryUser(user_id: user.id)
+    $scope.taskList = Task.index
+      user_id: user.id
+      , (success) ->
+        $scope.checkInList = CheckIn.queryUser(user_id: user.id)
     $scope.search = {}
     addNewTask()
 
@@ -11,7 +13,12 @@ upflow.controller 'HomeController', ($scope, CheckIn, Session, Task) ->
 
   $scope.toggleDisplay = (task) ->
     $scope.displayedTask = if $scope.displayedTask == task then undefined else task
-    $scope.search.task_id = if $scope.search.task_id == task.id then undefined else task.id
+    oldSearch = $scope.search.task_id
+    $scope.search.task_id = 0
+    $timeout(
+      -> $scope.search.task_id = if oldSearch == task.id then undefined else task.id,
+      500
+    )
     $scope.newCheckInForTask(task)
 
   $scope.displayed = (task) -> $scope.displayedTask == task if $scope.displayedTask
@@ -75,13 +82,11 @@ upflow.controller 'HomeController', ($scope, CheckIn, Session, Task) ->
       console.log("error in updating task repeat")
 
   $scope.newCheckInForTask = (task) ->
-    $scope.newCheckInList ?= []
-    unless _.findWhere($scope.newCheckInList, {task_id: task.id})
-      $scope.newCheckInList.push({
-        task_id: task.id
-        task_name: task.name
-        created_at: new Date()
-      })
+    $scope.newCheckIn = {
+      task_id: task.id
+      task_name: task.name
+      created_at: new Date()
+    }
 
   $scope.updateLastCheckIn = (task_id) ->
     _.findWhere($scope.taskList, {id: task_id}).last_check_in = new Date()
@@ -91,9 +96,8 @@ upflow.controller 'HomeController', ($scope, CheckIn, Session, Task) ->
       check_in: newCheckIn
       user_id: $scope.currentUser.id
     , (savedCheckIn) ->
-      $scope.checkInList.push(savedCheckIn)
+      $scope.checkInList.unshift(savedCheckIn)
       $scope.updateLastCheckIn(savedCheckIn.task_id)
-      $scope.newCheckInList = _.without($scope.newCheckInList, newCheckIn)
       $scope.newCheckInForTask({ id: newCheckIn.task_id, name: newCheckIn.task_name })
     , (error) ->
       console.log('Error in saving check in')

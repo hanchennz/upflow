@@ -4,7 +4,7 @@ upflow.config ($routeProvider, $locationProvider) ->
   $routeProvider
   .when '/',
       controller: 'HomeController'
-      templateUrl: '../assets/home.html'
+      templateUrl: '../assets/main.html'
     .otherwise redirectTo: '/'
 
 upflow.run (editableOptions) ->

@@ -1,0 +1,72 @@
+#main
+  #navigation.row.navigation-bar.vertical-parent
+    .col-md-2.vertical-centered
+      a href="#" upFlow
+    .col-md-8
+    .col-md-1.vertical-centered
+      a href="#" About
+    .col-md-1.vertical-centered
+      a href="/users/sign_out" target="_self" Logout
+  #tasks.col-md-4
+    div.task-animate ng-repeat="task in taskList | orderBy:['rank', 'repeat_by']" ng-click="toggleDisplay(task)"
+      div.task class="{{task.color}}" ng-class="{displayed: displayed(task)}"
+        div.row.header ng-if="!task.editMode"
+          div.col-xs-10.vertical-parent
+            h4.vertical-centered editable-text="task.name" e-form="taskNameForm" onbeforesave="updateTaskName($data, task)" blur="submit" e-maxlength="50" ng-init="task.oldName = task.name"
+              | {{task.name}}
+          span.glyphicon.glyphicon-chevron-down.col-xs-2 ng-show="displayed(task)"
+          span.glyphicon.glyphicon-chevron-up.col-xs-2 ng-show="!displayed(task)"
+        span ng-if="!task.editMode && displayed(task)" ng-click="$event.stopPropagation()"
+          div.body.row
+            div.content.col-xs-12
+              div.col-xs-10 editable-textarea="task.description" e-form="taskDescriptionForm" onbeforesave="updateTaskDescription($data, task)" buttons="no" blur="submit" e-maxlength="2000" ng-init="task.oldDescription = task.description"
+                | {{task.description}}
+              div.edit.col-xs-2 ng-show="!editEnabled(taskDescriptionForm)"
+                span.glyphicon.glyphicon-pencil ng-click="toggleXEditMode(taskDescriptionForm)"
+            div.col-xs-12
+              | Next Due Date: {{task.next_due_date | date: 'M/d/yy'}}
+          div.footer.row
+            div.btn-group.col-xs-10
+              button.btn.btn-default ng-repeat="option in repeat_by_options" type="button" ng-class="{active: task.repeat_by == option}" ng-click="updateTaskRepeat(task, option)"
+                | {{option}}
+            div.col-xs-2
+              span.glyphicon.glyphicon-trash ng-click="deleteTask(task)"
+  #check-ins.col-md-8
+    .check-in
+      form#new-task ng-submit="saveTask(newTask)" ng-if="search.task_id == undefined"
+        div.row
+          div.col-xs-12
+            input.task-input placeholder="Create new task..." ng-model="newTask.name" required="" maxlength="50"
+        div.row
+          div.col-md-12
+            textarea.non-x-edit placeholder="What do you want to get done?" ng-model="newTask.description" maxlength="2000"
+        div.row
+          div.col-xs-10.repeat-by
+            ' Days between each Check In:
+            div.btn-group
+              button.btn.btn-default ng-repeat="option in repeat_by_options" type="button" ng-class="{active: newTask.repeat_by == option}" ng-click="newTask.repeat_by = option"
+                | {{option}}
+          div.col-xs-2
+            button.btn.btn-success.pull-right type="submit" Create Task
+      form#new-check-in ng-submit="saveCheckIn(newCheckIn)" ng-if="search.task_id != undefined"
+        div.row
+          div.col-md-9.col-xs-8
+            h4
+              | {{newCheckIn.task_name}}
+        div.row
+          div.col-md-12
+            textarea.non-x-edit ng-model="newCheckIn.note" placeholder="What did you do today?" maxlength="2000" required=""
+          div.col-md-12
+            button.btn.btn-success.pull-right type="submit" Check In
+    #check-in-list.check-in.row.check-in-animate ng-repeat="checkIn in checkInList | filter:search"
+      div.row
+        div.col-md-9.col-xs-8
+          h4
+            | {{checkIn.task_name}}
+        div.date.col-md-3.col-xs-4.text-right
+          | {{checkIn.created_at | date: 'EEEE, MMMM d, y'}}
+        div.col-md-12.col-xs-8.reduced-content
+          div.note editable-textarea="checkIn.note" e-form="checkInNoteForm" onbeforesave="updateCheckIn($data, checkIn)" buttons="no" blur="submit" e-maxlength="2000" ng-init="checkIn.oldNote = checkIn.note"
+            | {{checkIn.note}}
+            span.glyphicon.glyphicon-pencil ng-click="toggleXEditMode(checkInNoteForm)"
+            span.glyphicon.glyphicon-trash ng-click="deleteCheckIn(checkIn)"

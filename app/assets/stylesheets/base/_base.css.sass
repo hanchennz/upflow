@@ -2,7 +2,7 @@ html
   height: 100%
 
 body
-  background-color: $background-color-darker-grey
+  background-color: $lighter-blue
   font-family: 'Source Sans Pro', sans-serif
   height: 100%
   margin: 0
@@ -42,22 +42,8 @@ body
     &.active
       background-color: #{$darkcolor}
 
-  &::after
-    background-color: #{$color}
-    content: ''
-    opacity: 0.6
-    position: absolute
-    z-index: -1
-    left: 0
-    right: 0
-    top: 0
-    bottom: 0
-
-  &.active::after
-    opacity: 1
-
-  &.displayed
-    box-shadow: 0 0 10px 5px $blue
+  background-color: #{$color}
+  border-bottom: 1px solid #{$darkcolor}
 
 div.blue
   @include color($blue, $darker-blue)

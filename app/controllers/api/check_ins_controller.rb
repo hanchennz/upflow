@@ -22,9 +22,9 @@ class Api::CheckInsController < ApplicationController
 
   def index
     if params[:task_id]
-      @check_ins = Task.find(params[:task_id]).check_ins
+      @check_ins = Task.find(params[:task_id]).check_ins.order(created_at: :desc)
     elsif params[:user_id]
-      @check_ins = User.find(params[:user_id]).check_ins
+      @check_ins = User.find(params[:user_id]).check_ins.order(created_at: :desc)
     end
   end
 

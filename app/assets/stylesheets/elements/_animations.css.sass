@@ -1,24 +1,28 @@
 .check-in-animate
   &.ng-enter,
   &.ng-leave
-    -webkit-transition: 0.4s ease all
-    transition: 0.4s ease all
     position: relative
     display: block
-    overflow: hidden
-    text-overflow: clip
 
   &.ng-enter
+    @include transition(0.6s)
+    left: -100%
+    max-height: 0
     opacity: 0
-    left: -5rem
 
-  &.ng-leave.ng-leave-active
-    opacity: 0
-
-  &.ng-leave,
   &.ng-enter.ng-enter-active
+    max-height: 100%
     opacity: 1
     left: 0
+
+  &.ng-leave
+    @include transition(0.3s)
+    max-height: 100%
+    opacity: 1
+
+  &.ng-leave.ng-leave-active
+    max-height: 0
+    opacity: 0
 
 .task-animate
   &.ng-enter,
@@ -32,7 +36,7 @@
 
   &.ng-enter
     opacity: 0
-    right: -5rem
+    left: -5rem
 
   &.ng-leave.ng-leave-active
     opacity: 0
@@ -40,4 +44,4 @@
   &.ng-leave,
   &.ng-enter.ng-enter-active
     opacity: 1
-    right: 0
+    left: 0
