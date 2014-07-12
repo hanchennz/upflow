@@ -10,13 +10,13 @@
   #tasks.col-md-4
     div.task-animate ng-repeat="task in taskList | orderBy:['rank', 'repeat_by']" ng-click="toggleDisplay(task)"
       div.task class="{{task.color}}"
-        div.row.header ng-if="!task.editMode"
-          div.col-xs-10.vertical-parent
+        div.row.header ng-mouseover="task.hover = true" ng-mouseout="task.hover = false"
+          div.col-xs-10.vertical-parent.task-name
             h4.vertical-centered editable-text="task.name" e-form="taskNameForm" onbeforesave="updateTaskName($data, task)" blur="submit" e-maxlength="50" ng-init="task.oldName = task.name"
               | {{task.name}}
-          span.glyphicon.glyphicon-chevron-down.col-xs-2 ng-show="displayed(task)"
-          span.glyphicon.glyphicon-chevron-up.col-xs-2 ng-show="!displayed(task)"
-        div.task-content ng-show="!task.editMode && displayed(task)" ng-click="$event.stopPropagation()"
+          div.col-xs-2.expand-icon ng-class="{hover: task.hover}"
+            span.glyphicon ng-class="{'glyphicon-chevron-up': !displayed(task), 'glyphicon-chevron-down': displayed(task)}"
+        div.task-content ng-class="{expand: displayed(task)}" ng-click="$event.stopPropagation()"
           div.body.row
             div.content.col-xs-12
               div.col-xs-10 editable-textarea="task.description" e-form="taskDescriptionForm" onbeforesave="updateTaskDescription($data, task)" buttons="no" blur="submit" e-maxlength="2000" ng-init="task.oldDescription = task.description"
