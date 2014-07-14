@@ -16,7 +16,7 @@
             span.glyphicon ng-class="{'glyphicon-chevron-up': !displayed(task), 'glyphicon-chevron-down': displayed(task)}"
         div.task-content ng-class="{expand: displayed(task)}" ng-click="$event.stopPropagation()"
           div.body.row
-            div.col-xs-10
+            div.col-xs-10.task-description
               div editable-textarea="task.description" e-form="taskDescriptionForm" onbeforesave="updateTaskDescription($data, task)" buttons="no" blur="submit" e-maxlength="2000" ng-init="task.oldDescription = task.description"
               | {{task.description}}
               div
@@ -56,7 +56,7 @@
             textarea.non-x-edit ng-model="newCheckIn.note" placeholder="What did you do today?" maxlength="2000" required=""
           div.col-md-12
             button.btn.btn-success.pull-right type="submit" Check In
-    #check-in-list.check-in.row.check-in-animate ng-repeat="checkIn in checkInList | filter:search"
+    #check-in-list.check-in.row.check-in-animate ng-repeat="checkIn in filteredCheckInList = (checkInList | filter:search)"
       div.row
         div.col-md-9.col-xs-8
           h4
@@ -68,3 +68,9 @@
             | {{checkIn.note}}
             span.glyphicon.glyphicon-pencil ng-click="toggleXEditMode(checkInNoteForm)"
             span.glyphicon.glyphicon-trash ng-click="deleteCheckIn(checkIn)"
+    #no-check-in-message.check-in.row ng-show="!filteredCheckInList.length && !loading && taskList.length"
+      span
+        | This task does not have any check-ins. Add one above!
+    #no-task-message.check-in.row ng-show="!taskList.length && !loading"
+      span
+        | You currently do not have any tasks. Add one above!

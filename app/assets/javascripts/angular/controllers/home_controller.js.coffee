@@ -1,11 +1,16 @@
 upflow.controller 'HomeController', ($scope, $timeout, CheckIn, Session, Task) ->
 
+  $scope.loading = true
+
   Session.getUser (user) ->
     $scope.currentUser = user
     $scope.taskList = Task.index
       user_id: user.id
       , (success) ->
-        $scope.checkInList = CheckIn.queryUser(user_id: user.id)
+        $scope.checkInList = CheckIn.queryUser
+          user_id: user.id
+          , (success) ->
+            $scope.loading = false
     $scope.search = {}
     addNewTask()
 
