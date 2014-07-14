@@ -122,3 +122,7 @@ upflow.controller 'HomeController', ($scope, $timeout, CheckIn, Session, Task) -
     , (error) ->
       checkIn.note = checkIn.oldNote
       console.log('There was an error in updating the check in')
+
+  $scope.convertToDate = (date) ->
+    new Date(date)
+

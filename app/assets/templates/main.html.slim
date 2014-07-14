@@ -17,10 +17,10 @@
         div.task-content ng-class="{expand: displayed(task)}" ng-click="$event.stopPropagation()"
           div.body.row
             div.col-xs-10.task-description
-              div editable-textarea="task.description" e-form="taskDescriptionForm" onbeforesave="updateTaskDescription($data, task)" buttons="no" blur="submit" e-maxlength="2000" ng-init="task.oldDescription = task.description"
+              div editable-textarea="task.description" e-form="taskDescriptionForm" onbeforesave="updateTaskDescription($data, task)" blur="submit" e-maxlength="2000" ng-init="task.oldDescription = task.description"
               | {{task.description}}
               div
-                | Next Due Date: {{task.next_due_date | date: 'M/d/yy'}}
+                | Next Due Date: {{ convertToDate(task.next_due_date) | date: 'M/d/yy'}}
             div.edit.col-xs-2.icon-button
               span.glyphicon.glyphicon-pencil ng-click="toggleXEditMode(taskDescriptionForm)"
           div.footer.row
@@ -62,7 +62,7 @@
           h4
             | {{checkIn.task_name}}
         div.date.col-md-3.col-xs-4.text-right
-          | {{checkIn.created_at | date: 'EEEE, MMMM d, y'}}
+          | {{ convertToDate(checkIn.created_at) | date: 'EEEE, MMMM d, y'}}
         div.col-md-12.col-xs-8.reduced-content
           div.note editable-textarea="checkIn.note" e-form="checkInNoteForm" onbeforesave="updateCheckIn($data, checkIn)" buttons="no" blur="submit" e-maxlength="2000" ng-init="checkIn.oldNote = checkIn.note"
             | {{checkIn.note}}
