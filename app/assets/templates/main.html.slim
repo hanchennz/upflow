@@ -10,25 +10,25 @@
       div.task class="{{task.color}}"
         div.row.header ng-mouseover="task.hover = true" ng-mouseout="task.hover = false"
           div.col-xs-10.vertical-parent.task-name
-            h4.vertical-centered editable-text="task.name" e-form="taskNameForm" onbeforesave="updateTaskName($data, task)" blur="submit" e-maxlength="50" ng-init="task.oldName = task.name"
+            h4.vertical-centered
               | {{task.name}}
           div.col-xs-2.expand-icon ng-class="{hover: task.hover}"
             span.glyphicon ng-class="{'glyphicon-chevron-up': !displayed(task), 'glyphicon-chevron-down': displayed(task)}"
         div.task-content ng-class="{expand: displayed(task)}" ng-click="$event.stopPropagation()"
           div.body.row
             div.col-xs-10.task-description
-              div editable-textarea="task.description" e-form="taskDescriptionForm" onbeforesave="updateTaskDescription($data, task)" blur="submit" e-maxlength="2000" ng-init="task.oldDescription = task.description"
+              div editable-textarea="task.description" e-form="taskDescriptionForm" onbeforesave="updateTaskDescription($data, task)" blur="ignore" e-maxlength="2000" ng-init="task.oldDescription = task.description"
               | {{task.description}}
               div
                 | Next Due Date: {{ convertToDate(task.next_due_date) | date: 'M/d/yy'}}
-            div.edit.col-xs-2.icon-button
-              span.glyphicon.glyphicon-pencil ng-click="toggleXEditMode(taskDescriptionForm)"
+            div.edit.col-xs-2.icon-button ng-click="toggleXEditMode(taskDescriptionForm)"
+              span.glyphicon.glyphicon-pencil
           div.footer.row
             div.btn-group.col-xs-10
               button.btn.btn-default ng-repeat="option in repeat_by_options" type="button" ng-class="{active: task.repeat_by == option}" ng-click="updateTaskRepeat(task, option)"
                 | {{option}}
-            div.col-xs-2.icon-button
-              span.glyphicon.glyphicon-trash ng-click="deleteTask(task)"
+            div.col-xs-2.icon-button ng-click="deleteTask(task)"
+              span.glyphicon.glyphicon-trash
   #check-ins.col-md-8
     .check-in
       form#new-task ng-submit="saveTask(newTask)" ng-if="search.task_id == undefined"
