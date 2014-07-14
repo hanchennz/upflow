@@ -48,11 +48,18 @@ body
     @include transition(0.3s)
     background-color: #{$darkcolor}
 
+  div.icon-button
+    @include transition(0.3s)
+
+    &:hover
+      @include transition(0.3s)
+      background-color: #{$color}
+
   div.expand-icon
     &.hover
       @include transition(0.3s)
       background-color: #{$color}
-      box-shadow: 2px 0px 10px -4px black
+      box-shadow: 2px 0px 8px -4px black
 
 div.blue
   @include color($blue, $darker-blue)

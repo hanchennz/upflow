@@ -53,8 +53,6 @@ upflow.controller 'HomeController', ($scope, $timeout, CheckIn, Session, Task) -
       console.log('There was an error in delete the task')
 
   $scope.updateTaskDescription = (description, task) ->
-    unless description?
-      return 'Task description cannot be blank.'
     Task.update { task: {description: description}, id: task.id }
     , (success) ->
       task.oldDescription = task.description

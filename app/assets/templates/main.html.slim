@@ -1,11 +1,9 @@
 #main
-  #navigation.row.navigation-bar.vertical-parent
-    .col-md-2.vertical-centered
+  #navigation.navigation-bar.row
+    .col-md-2.col-xs-6
       a href="#" upFlow
-    .col-md-8
-    .col-md-1.vertical-centered
-      a href="#" About
-    .col-md-1.vertical-centered
+    .col-md-9.col-xs-4
+    .col-md-1.col-xs-2.align-right
       a href="/users/sign_out" target="_self" Logout
   #tasks.col-md-4
     div.task-animate ng-repeat="task in taskList | orderBy:['rank', 'repeat_by']" ng-click="toggleDisplay(task)"
@@ -18,18 +16,18 @@
             span.glyphicon ng-class="{'glyphicon-chevron-up': !displayed(task), 'glyphicon-chevron-down': displayed(task)}"
         div.task-content ng-class="{expand: displayed(task)}" ng-click="$event.stopPropagation()"
           div.body.row
-            div.content.col-xs-12
-              div.col-xs-10 editable-textarea="task.description" e-form="taskDescriptionForm" onbeforesave="updateTaskDescription($data, task)" buttons="no" blur="submit" e-maxlength="2000" ng-init="task.oldDescription = task.description"
-                | {{task.description}}
-              div.edit.col-xs-2 ng-show="!editEnabled(taskDescriptionForm)"
-                span.glyphicon.glyphicon-pencil ng-click="toggleXEditMode(taskDescriptionForm)"
-            div.col-xs-12
-              | Next Due Date: {{task.next_due_date | date: 'M/d/yy'}}
+            div.col-xs-10
+              div editable-textarea="task.description" e-form="taskDescriptionForm" onbeforesave="updateTaskDescription($data, task)" buttons="no" blur="submit" e-maxlength="2000" ng-init="task.oldDescription = task.description"
+              | {{task.description}}
+              div
+                | Next Due Date: {{task.next_due_date | date: 'M/d/yy'}}
+            div.edit.col-xs-2.icon-button
+              span.glyphicon.glyphicon-pencil ng-click="toggleXEditMode(taskDescriptionForm)"
           div.footer.row
             div.btn-group.col-xs-10
               button.btn.btn-default ng-repeat="option in repeat_by_options" type="button" ng-class="{active: task.repeat_by == option}" ng-click="updateTaskRepeat(task, option)"
                 | {{option}}
-            div.col-xs-2
+            div.col-xs-2.icon-button
               span.glyphicon.glyphicon-trash ng-click="deleteTask(task)"
   #check-ins.col-md-8
     .check-in
