@@ -45,26 +45,18 @@ upflow.controller 'HomeController', ($scope, $timeout, CheckIn, Session, Task) -
     , (savedTask) ->
       $scope.taskList.push(savedTask)
       addNewTask()
-    , (error) ->
-      console.log('Error in saving task')
-      console.log(error)
 
   $scope.deleteTask = (task) ->
     Task.delete { id: task.id }
     , (success) ->
       $scope.taskList = _.without($scope.taskList, task)
-      console.log('Task was successfully deleted')
-    , (error) ->
-      console.log('There was an error in delete the task')
 
   $scope.updateTaskDescription = (description, task) ->
     Task.update { task: {description: description}, id: task.id }
     , (success) ->
       task.oldDescription = task.description
-      console.log('The task description was successfully updated')
     , (error) ->
       task.description = task.oldDescription
-      console.log('There was an error in updating the task description')
 
   $scope.updateTaskName = (name, task) ->
     unless name?
@@ -72,17 +64,13 @@ upflow.controller 'HomeController', ($scope, $timeout, CheckIn, Session, Task) -
     Task.update { task: {name: name}, id: task.id }
     , (success) ->
       task.oldName = task.name
-      console.log('The task name was successfully updated')
     , (error) ->
       task.name = task.oldName
-      console.log('There was an error in updating the task name')
 
   $scope.updateTaskRepeat = (task, option) ->
     Task.update { task: { repeat_by: option }, id: task.id }
     , (success) ->
       task.repeat_by = option
-    , (error) ->
-      console.log("error in updating task repeat")
 
   $scope.newCheckInForTask = (task) ->
     $scope.newCheckIn = {
@@ -102,15 +90,11 @@ upflow.controller 'HomeController', ($scope, $timeout, CheckIn, Session, Task) -
       $scope.checkInList.unshift(savedCheckIn)
       $scope.updateLastCheckIn(savedCheckIn.task_id)
       $scope.newCheckInForTask({ id: newCheckIn.task_id, name: newCheckIn.task_name })
-    , (error) ->
-      console.log('Error in saving check in')
 
   $scope.deleteCheckIn = (checkIn) ->
     CheckIn.delete { id: checkIn.id }
     , (success) ->
       $scope.checkInList = _.without($scope.checkInList, checkIn)
-    , (error) ->
-      console.log('There was an error in delete the checkIn')
 
   $scope.updateCheckIn = (note, checkIn) ->
     if note == undefined
@@ -118,11 +102,8 @@ upflow.controller 'HomeController', ($scope, $timeout, CheckIn, Session, Task) -
     CheckIn.update { check_in: { note: note }, id: checkIn.id }
     , (success) ->
       checkIn.oldNote = checkIn.note
-      console.log('The check in was successfully updated')
     , (error) ->
       checkIn.note = checkIn.oldNote
-      console.log('There was an error in updating the check in')
 
   $scope.convertToDate = (date) ->
     new Date(date)
-

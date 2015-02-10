@@ -18,7 +18,8 @@
           div.body.row
             div.col-xs-10.task-description
               div editable-textarea="task.description" e-form="taskDescriptionForm" onbeforesave="updateTaskDescription($data, task)" blur="ignore" e-maxlength="2000" ng-init="task.oldDescription = task.description"
-              | {{task.description}}
+              span ng-hide="editEnabled(taskDescriptionForm)"
+                | {{task.description}}
               div
                 | Next Due Date: {{ convertToDate(task.next_due_date) | date: 'M/d/yy'}}
             div.edit.col-xs-2.icon-button ng-click="toggleXEditMode(taskDescriptionForm)"
@@ -68,7 +69,7 @@
             | {{checkIn.note}}
             span.glyphicon.glyphicon-pencil ng-click="toggleXEditMode(checkInNoteForm)"
             span.glyphicon.glyphicon-trash ng-click="deleteCheckIn(checkIn)"
-    #no-check-in-message.check-in.row ng-show="!filteredCheckInList.length && !loading && taskList.length"
+    #no-check-in-message.check-in.row ng-show="!filteredCheckInList.length && !loading && taskList.length && displayedTask"
       span
         | This task does not have any check-ins. Add one above!
     #no-task-message.check-in.row ng-show="!taskList.length && !loading"
