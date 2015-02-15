@@ -11,13 +11,19 @@ div.task class="{{task.color}}"
         div editable-textarea="task.description" e-form="taskDescriptionForm" onbeforesave="updateTaskDescription($data, task)" blur="ignore" e-maxlength="2000" ng-init="task.oldDescription = task.description"
         span ng-hide="editEnabled(taskDescriptionForm)"
           | {{task.description}}
-        div
+        .due-date ng-if="!task.completed_at"
           | Next Due Date: {{ convertToDate(task.next_due_date) | date: 'M/d/yy'}}
-      div.edit.col-xs-2.icon-button ng-click="toggleXEditMode(taskDescriptionForm)"
-        span.glyphicon.glyphicon-pencil
+        .due-date ng-if="task.completed_at"
+          | Completed on: {{ convertToDate(task.completed_at) | date: 'M/d/yy'}}
+      .task-controls.col-xs-2
+        .edit.icon-button ng-click="toggleXEditMode(taskDescriptionForm)" title="Edit Task"
+          span.glyphicon.glyphicon-pencil
+        .edit.icon-button ng-click="toggleTaskComplete()"
+          span.glyphicon ng-class="task.completed_at ? 'glyphicon-repeat' : 'glyphicon-ok'" title="{{toggleTaskCompleteTitle()}}"
     div.footer.row
-      div.btn-group.col-xs-10
-        button.btn.btn-default ng-repeat="option in repeatByOptions" type="button" ng-class="{active: task.repeat_by == option}" ng-click="updateTaskRepeat(task, option)"
-          | {{option}}
-      div.col-xs-2.icon-button ng-click="deleteTask(task)"
+      .repeat-by.col-xs-10
+        div ng-if="!task.completed_at"
+          ' Remind me every:
+          select.chosen-select chosen="" disable-search="true" ng-options="option.value as option.name for option in repeatByOptions" ng-model="task.repeat_by" ng-change="updateTaskRepeat()"
+      div.col-xs-2.icon-button ng-click="deleteTask(task)" title="Delete Task"
         span.glyphicon.glyphicon-trash

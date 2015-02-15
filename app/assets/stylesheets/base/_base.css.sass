@@ -13,9 +13,6 @@ body
   width: 100%
   background-color: $main-background-color
 
-.btn-group > .btn
-  margin: 0 0.1rem
-
 .btn
   padding-top: 0.3rem
   border-radius: 0
@@ -36,12 +33,6 @@ body
   transition: $time ease-in-out
 
 =color($color, $darkcolor)
-  .btn-group > .btn-default
-    color: white
-    background-color: #{$color}
-    &.active
-      background-color: #{$darkcolor}
-
   background-color: #{$color}
 
   div.task-content, div.expand-icon
@@ -75,6 +66,18 @@ div.yellow
 
 div.green
   @include color($green, $darker-green)
+
+.chosen-select
+  width: 8rem
+
+#main
+  .chosen-container-single .chosen-single
+    border-radius: 0
+    background: white
+    background-color: white
+
+  .chosen-drop
+    border-radius: 0
 
 input[type="text"], textarea, .task-input
   border: none

@@ -10,11 +10,6 @@ class Task < ActiveRecord::Base
   has_many :check_ins, dependent: :destroy, inverse_of: :task
 
   # Mixins
-  enumerize :border_color,
-            default: :none,
-            in: %i(red orange yellow green blue none),
-            scope: true,
-            predicates: true
   enumerize :color,
             default: :green,
             in: %i(red orange yellow green blue),
@@ -23,7 +18,6 @@ class Task < ActiveRecord::Base
   enumerize :task_type, in: %i(one_off repeating), scope: true, predicates: true
 
   # Validations
-  validates :border_color, presence: true
   validates :color, presence: true
   validates :description, length: { maximum: 2000 }
   validates :name, length: 1..50

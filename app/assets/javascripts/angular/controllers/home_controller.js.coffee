@@ -13,7 +13,19 @@ upflow.controller 'HomeController', ($scope, $timeout, CheckIn, Session, Task) -
     $scope.search = {}
     addNewTask()
 
-  $scope.repeatByOptions = [ 1, 3, 5, 7, 10, 15, 30 ]
+  $scope.repeatByOptions = [
+    { name: '1 days', value: 1 },
+    { name: '2 days', value: 2 },
+    { name: '3 days', value: 3 },
+    { name: '4 days', value: 4 },
+    { name: '5 days', value: 5 },
+    { name: '7 days', value: 7 },
+    { name: '10 days', value: 10 },
+    { name: '14 days', value: 14 },
+    { name: '20 days', value: 20 },
+    { name: '30 days', value: 30 },
+    { name: '60 days', value: 60 }
+  ]
 
   addNewCheckInForTask = (task) ->
     $scope.newCheckIn =

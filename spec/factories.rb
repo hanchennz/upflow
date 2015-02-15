@@ -15,7 +15,6 @@ FactoryGirl.define do
 
   factory :task do
     user
-    border_color 'none'
     color 'green'
     name { "#{Faker::Company.name}" + ' Task' }
     repeat_by { rand(1..6) }

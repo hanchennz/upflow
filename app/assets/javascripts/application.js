@@ -12,8 +12,10 @@
 //
 //= require angular
 //= require angular-animate
+//= require angular-chosen
 //= require angular-resource
 //= require angular-route
+//= require chosen-jquery
 //= require jquery
 //= require jquery_ujs
 //= require ng-rails-csrf

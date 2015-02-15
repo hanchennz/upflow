@@ -3,7 +3,7 @@
 upflow.directive 'upTask', (Task) ->
   restrict: 'E'
   scope:
-    deleteTask: '&'
+    deleteTask: '='
     displayedTask: '='
     repeatByOptions: '='
     task: '='
@@ -18,10 +18,21 @@ upflow.directive 'upTask', (Task) ->
       , (error) ->
         task.description = task.oldDescription
 
-    scope.updateTaskRepeat = (task, option) ->
-      Task.update { task: { repeat_by: option }, id: task.id }
+    scope.updateTaskRepeat = ->
+      Task.update { task: { repeat_by: scope.task.repeat_by }, id: scope.task.id }
       , (success) ->
-        task.repeat_by = option
+
+    scope.toggleTaskComplete = ->
+      completed_at = if scope.task.completed_at then null else new Date()
+      Task.update { task: { completed_at: completed_at }, id: scope.task.id }
+      , (success) ->
+        _(scope.task).extend { completed_at: success.completed_at, rank: success.rank, color: success.color }
+
+    scope.toggleTaskCompleteTitle = ->
+      if scope.task.completed_at
+        'Reactivate Task'
+      else
+        'Complete Task'
 
     scope.toggleXEditMode = (form) -> form.$show()
     scope.editEnabled = (form) -> form.$visible

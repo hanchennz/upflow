@@ -19,10 +19,8 @@
             textarea.non-x-edit placeholder="What do you want to get done?" ng-model="newTask.description" maxlength="2000"
         div.row
           div.col-xs-10.repeat-by
-            ' Days between each Check In:
-            div.btn-group
-              button.btn.btn-default ng-repeat="option in repeatByOptions" type="button" ng-class="{active: newTask.repeat_by == option}" ng-click="newTask.repeat_by = option"
-                | {{option}}
+            ' Remind me every:
+            select.chosen-select chosen="" disable-search="true" ng-options="option.value as option.name for option in repeatByOptions" ng-model="newTask.repeat_by"
           div.col-xs-2
             button.btn.btn-success.pull-right type="submit" Create Task
       form#new-check-in ng-submit="saveCheckIn(newCheckIn)" ng-if="search.task_id != undefined"

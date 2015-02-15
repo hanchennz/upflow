@@ -4,7 +4,7 @@ upflow.directive 'upCheckIn', (CheckIn) ->
   restrict: 'E'
   scope:
     checkIn: '='
-    deleteCheckIn: '&'
+    deleteCheckIn: '='
   templateUrl: '<%= asset_path("directives/check_in.html") %>'
   link: (scope, element, attrs) ->
     scope.updateCheckIn = (note, checkIn) ->

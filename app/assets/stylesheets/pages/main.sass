@@ -60,7 +60,6 @@
       .glyphicon
         font-size: 2rem
         padding: 0
-        margin-top: 0.8rem
 
       .glyphicon-chevron-up, .glyphicon-chevron-down
         @include transition(0.3s)
@@ -68,6 +67,9 @@
   .task-content
     max-height: 0rem
     overflow: hidden
+
+    .task-controls
+      padding: 0
 
     &.expand
       min-height: 5rem
@@ -78,11 +80,28 @@
 
     .body
       .task-description
-        padding-top: 1rem
+        padding-top: 10px
+
+        .due-date
+          margin-top: 10px
 
     .footer
-      text-align: center
-      padding: 1rem 0 0 0
+      overflow: visible
+
+      .repeat-by
+        margin-top: 12px
+
+      .chosen-drop
+        margin-bottom: 1px
+        top: -66px
+
+      .chosen-with-drop .chosen-single
+        border-radius: 0
+
+      .chosen-results
+        margin-bottom: 0
+        margin-top: 4px
+        max-height: 63px
 
   .glyphicon
     color: white
@@ -149,12 +168,6 @@
     padding: 0.5rem 1rem
     background: $blue
     color: white
-
-  .btn-group > .btn-default
-    color: lightgrey
-    &.active
-      background: $green
-      color: white
 
   .repeat-by
     color: grey

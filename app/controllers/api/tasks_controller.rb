@@ -29,7 +29,8 @@ class Api::TasksController < ApplicationController
   def update
     @task = Task.find(params[:id])
     if @task.update_attributes(permitted_params)
-      head :no_content
+      @task.update_colors
+      render 'show', status: :ok
     else
       render_validation_errors @task
     end
@@ -39,8 +40,7 @@ class Api::TasksController < ApplicationController
 
   def permitted_params
     params.require(:task).permit(
-      :border_color,
-      :color,
+      :completed_at,
       :description,
       :due_at,
       :id,
