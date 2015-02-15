@@ -1,0 +1,28 @@
+#= depend_on_asset 'directives/task.html'
+
+upflow.directive 'upTask', (Task) ->
+  restrict: 'E'
+  scope:
+    deleteTask: '&'
+    displayedTask: '='
+    repeatByOptions: '='
+    task: '='
+  templateUrl: '<%= asset_path("directives/task.html") %>'
+  link: (scope, element, attrs) ->
+    scope.displayed = (task) -> scope.displayedTask == task if scope.displayedTask
+
+    scope.updateTaskDescription = (description, task) ->
+      Task.update { task: {description: description}, id: task.id }
+      , (success) ->
+        task.oldDescription = task.description
+      , (error) ->
+        task.description = task.oldDescription
+
+    scope.updateTaskRepeat = (task, option) ->
+      Task.update { task: { repeat_by: option }, id: task.id }
+      , (success) ->
+        task.repeat_by = option
+
+    scope.toggleXEditMode = (form) -> form.$show()
+    scope.editEnabled = (form) -> form.$visible
+    scope.convertToDate = (date) -> new Date(date)

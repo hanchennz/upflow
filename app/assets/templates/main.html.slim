@@ -7,29 +7,7 @@
       a href="/users/sign_out" target="_self" Logout
   #tasks.col-md-4
     div.task-animate ng-repeat="task in taskList | orderBy:['rank', 'repeat_by']" ng-click="toggleDisplay(task)"
-      div.task class="{{task.color}}"
-        div.row.header ng-mouseover="task.hover = true" ng-mouseout="task.hover = false"
-          div.col-xs-10.vertical-parent.task-name
-            h4.vertical-centered
-              | {{task.name}}
-          div.col-xs-2.expand-icon ng-class="{hover: task.hover}"
-            span.glyphicon ng-class="{'glyphicon-chevron-up': !displayed(task), 'glyphicon-chevron-down': displayed(task)}"
-        div.task-content ng-class="{expand: displayed(task)}" ng-click="$event.stopPropagation()"
-          div.body.row
-            div.col-xs-10.task-description
-              div editable-textarea="task.description" e-form="taskDescriptionForm" onbeforesave="updateTaskDescription($data, task)" blur="ignore" e-maxlength="2000" ng-init="task.oldDescription = task.description"
-              span ng-hide="editEnabled(taskDescriptionForm)"
-                | {{task.description}}
-              div
-                | Next Due Date: {{ convertToDate(task.next_due_date) | date: 'M/d/yy'}}
-            div.edit.col-xs-2.icon-button ng-click="toggleXEditMode(taskDescriptionForm)"
-              span.glyphicon.glyphicon-pencil
-          div.footer.row
-            div.btn-group.col-xs-10
-              button.btn.btn-default ng-repeat="option in repeat_by_options" type="button" ng-class="{active: task.repeat_by == option}" ng-click="updateTaskRepeat(task, option)"
-                | {{option}}
-            div.col-xs-2.icon-button ng-click="deleteTask(task)"
-              span.glyphicon.glyphicon-trash
+      up-task delete-task="deleteTask" displayed-task="displayedTask" repeat-by-options="repeatByOptions" task="task" 
   #check-ins.col-md-8
     .check-in
       form#new-task ng-submit="saveTask(newTask)" ng-if="search.task_id == undefined"
@@ -43,7 +21,7 @@
           div.col-xs-10.repeat-by
             ' Days between each Check In:
             div.btn-group
-              button.btn.btn-default ng-repeat="option in repeat_by_options" type="button" ng-class="{active: newTask.repeat_by == option}" ng-click="newTask.repeat_by = option"
+              button.btn.btn-default ng-repeat="option in repeatByOptions" type="button" ng-class="{active: newTask.repeat_by == option}" ng-click="newTask.repeat_by = option"
                 | {{option}}
           div.col-xs-2
             button.btn.btn-success.pull-right type="submit" Create Task
@@ -57,21 +35,7 @@
             textarea.non-x-edit ng-model="newCheckIn.note" placeholder="What did you do today?" maxlength="2000" required=""
           div.col-md-12
             button.btn.btn-success.pull-right type="submit" Check In
-    #check-in-list.check-in.row.check-in-animate ng-repeat="checkIn in filteredCheckInList = (checkInList | filter:search)"
-      div.row
-        div.col-md-9.col-xs-8
-          h4
-            | {{checkIn.task_name}}
-        div.date.col-md-3.col-xs-4.text-right
-          | {{ convertToDate(checkIn.created_at) | date: 'EEEE, MMMM d, y'}}
-        div.col-md-12.col-xs-8.reduced-content
-          div.note editable-textarea="checkIn.note" e-form="checkInNoteForm" onbeforesave="updateCheckIn($data, checkIn)" buttons="no" blur="submit" e-maxlength="2000" ng-init="checkIn.oldNote = checkIn.note"
-            | {{checkIn.note}}
-            span.glyphicon.glyphicon-pencil ng-click="toggleXEditMode(checkInNoteForm)"
-            span.glyphicon.glyphicon-trash ng-click="deleteCheckIn(checkIn)"
-    #no-check-in-message.check-in.row ng-show="!filteredCheckInList.length && !loading && taskList.length && displayedTask"
-      span
-        | This task does not have any check-ins. Add one above!
+    up-check-in.check-in-animate check-in="checkIn" delete-check-in="deleteCheckIn" ng-repeat="checkIn in filteredCheckInList = (checkInList | filter:search)"
     #no-task-message.check-in.row ng-show="!taskList.length && !loading"
       span
         | You currently do not have any tasks. Add one above!

@@ -1,0 +1,12 @@
+.check-in.row
+  .row
+    .col-md-9.col-xs-8
+      h4
+        | {{checkIn.task_name}}
+    .date.col-md-3.col-xs-4.text-right
+      | {{ convertToDate(checkIn.created_at) | date: 'EEEE, MMM d, y'}}
+    .col-md-12.col-xs-8.reduced-content
+      .note editable-textarea="checkIn.note" e-form="checkInNoteForm" onbeforesave="updateCheckIn($data, checkIn)" buttons="no" blur="submit" e-maxlength="2000" ng-init="checkIn.oldNote = checkIn.note"
+        | {{checkIn.note}}
+        span.glyphicon.glyphicon-pencil ng-click="toggleXEditMode(checkInNoteForm)"
+        span.glyphicon.glyphicon-trash ng-click="deleteCheckIn(checkIn)"

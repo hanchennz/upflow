@@ -1,0 +1,20 @@
+#= depend_on_asset 'directives/check_in.html'
+
+upflow.directive 'upCheckIn', (CheckIn) ->
+  restrict: 'E'
+  scope:
+    checkIn: '='
+    deleteCheckIn: '&'
+  templateUrl: '<%= asset_path("directives/check_in.html") %>'
+  link: (scope, element, attrs) ->
+    scope.updateCheckIn = (note, checkIn) ->
+      if note == undefined
+        return 'Saved check-ins cannot be blank.'
+      CheckIn.update { check_in: { note: note }, id: checkIn.id }
+      , (success) ->
+        checkIn.oldNote = checkIn.note
+      , (error) ->
+        checkIn.note = checkIn.oldNote
+
+    scope.toggleXEditMode = (form) -> form.$show()
+    scope.convertToDate = (date) -> new Date(date)
