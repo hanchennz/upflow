@@ -21,6 +21,7 @@ upflow.directive 'upTask', (Task) ->
     scope.updateTaskRepeat = ->
       Task.update { task: { repeat_by: scope.task.repeat_by }, id: scope.task.id }
       , (success) ->
+        _(scope.task).extend { next_due_date: success.next_due_date, rank: success.rank, color: success.color }
 
     scope.toggleTaskComplete = ->
       completed_at = if scope.task.completed_at then null else new Date()
