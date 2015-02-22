@@ -4,7 +4,8 @@ Devise.setup do |config|
   # The secret key used by Devise. Devise uses this key to generate
   # random tokens. Changing this key will render invalid all existing
   # confirmation, reset password and unlock tokens in the database.
-  config.secret_key = '1875623a6a13643cc8ac1e2b326ca0823bb8df2211200321e791f241410385f806b69a017377e611a5c6234423e7ae09080e02d980d68ea24bc45bbfbbdba173'
+  config.secret_key = '1875623a6a13643cc8ac1e2b326ca0823bb8df2211200321e791f241410385f806b69a01737
+  7e611a5c6234423e7ae09080e02d980d68ea24bc45bbfbbdba173'
 
   # ==> Mailer Configuration
   # Configure the e-mail address which will be shown in Devise::Mailer,
@@ -41,12 +42,12 @@ Devise.setup do |config|
   # Configure which authentication keys should be case-insensitive.
   # These keys will be downcased upon creating or modifying a user and when used
   # to authenticate or find a user. Default is :email.
-  config.case_insensitive_keys = [ :email ]
+  config.case_insensitive_keys = [:email]
 
   # Configure which authentication keys should have whitespace stripped.
   # These keys will have whitespace before and after removed upon creating or
   # modifying a user and when used to authenticate or find a user. Default is :email.
-  config.strip_whitespace_keys = [ :email ]
+  config.strip_whitespace_keys = [:email]
 
   # Tell if authentication through request.params is enabled. True by default.
   # It can be set to an array that will enable params authentication only for the
@@ -95,7 +96,8 @@ Devise.setup do |config|
   config.stretches = Rails.env.test? ? 1 : 10
 
   # Setup a pepper to generate the encrypted password.
-  # config.pepper = '674da281d282b22ebd9b10d9368c32a254be86b6581287018ef4c43361e8f1fbd43fcb4b47a837f5881e06314f39fb6b558ff597d64d03fbb371ce0beaa88c9b'
+  # config.pepper = '674da281d282b22ebd9b10d9368c32a254be86b6581287018ef4c43361e8f1fbd43fcb4b47a837
+  # f5881e06314f39fb6b558ff597d64d03fbb371ce0beaa88c9b'
 
   # ==> Configuration for :confirmable
   # A period that the user is allowed to access the website even without

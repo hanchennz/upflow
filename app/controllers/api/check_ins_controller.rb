@@ -1,9 +1,8 @@
 class Api::CheckInsController < ApplicationController
-  before_filter :create_task, only: :create
+  before_action :create_task, only: :create
 
   def create
     @check_in = CheckIn.new(permitted_params)
-    puts 'here'
     if @check_in.save
       render 'show', status: :created
     else
@@ -47,16 +46,14 @@ class Api::CheckInsController < ApplicationController
   end
 
   def create_task
-    if params[:check_in][:task_id].nil?
-      @new_task = Task.create(
-        description: 'Automatically generated task.',
-        name: params[:check_in][:task_name],
-        repeat_by: params[:check_in][:repeat_by],
-        user_id: params[:user_id],
-        task_type: 'one_off'
-      )
-      puts 'create_task'
-      params[:check_in][:task_id] = @new_task.id
-    end
+    return false unless params[:check_in][:task_id].nil?
+    @new_task = Task.create(
+      description: 'Automatically generated task.',
+      name: params[:check_in][:task_name],
+      repeat_by: params[:check_in][:repeat_by],
+      user_id: params[:user_id],
+      task_type: 'one_off'
+    )
+    params[:check_in][:task_id] = @new_task.id
   end
 end

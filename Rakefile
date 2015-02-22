@@ -4,3 +4,10 @@
 require File.expand_path('../config/application', __FILE__)
 
 Upflow::Application.load_tasks
+
+if Rails.env.development? || Rails.env.test?
+  require 'rubocop/rake_task'
+  Rubocop::RakeTask.new
+  task(:default).clear
+  task default: %i(coffeelint rubocop spec)
+end
