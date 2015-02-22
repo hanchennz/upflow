@@ -28,8 +28,7 @@ class Api::TasksController < ApplicationController
 
   def update
     @task = Task.find(params[:id])
-    if @task.update_attributes(permitted_params)
-      @task.update_colors
+    if @task.update_attributes(permitted_params).reload
       render 'show', status: :ok
     else
       render_validation_errors @task

@@ -14,4 +14,7 @@ class User < ActiveRecord::Base
   # Associations
   has_many :check_ins, through: :tasks, dependent: :destroy
   has_many :tasks, dependent: :destroy
+
+  # Validations
+  validates :email, length: { maximum: 255 }
 end
