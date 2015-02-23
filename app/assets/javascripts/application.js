@@ -11,7 +11,6 @@
 // about supported directives.
 //
 //= require angular
-//= require angular-animate
 //= require angular-chosen
 //= require angular-resource
 //= require angular-route

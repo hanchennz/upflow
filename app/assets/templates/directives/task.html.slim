@@ -1,9 +1,9 @@
 div.task class="{{task.color}}"
-  div.row.header ng-mouseover="task.hover = true" ng-mouseout="task.hover = false"
+  div.row.header
     div.col-xs-10.vertical-parent.task-name
       h4.vertical-centered
         | {{task.name}}
-    div.col-xs-2.expand-icon ng-class="{hover: task.hover}"
+    div.col-xs-2.expand-icon
       span.glyphicon ng-class="{'glyphicon-chevron-up': !displayed(task), 'glyphicon-chevron-down': displayed(task)}"
   div.task-content ng-class="{expand: displayed(task)}" ng-click="$event.stopPropagation()"
     div.body.row
@@ -12,9 +12,9 @@ div.task class="{{task.color}}"
         span ng-hide="editEnabled(taskDescriptionForm)"
           | {{task.description}}
         .due-date ng-if="!task.completed_at"
-          | Next Due Date: {{ convertToDate(task.next_due_date) | date: 'M/d/yy'}}
+          | Next Due Date: {{ task.next_due_date }}
         .due-date ng-if="task.completed_at"
-          | Completed on: {{ convertToDate(task.completed_at) | date: 'M/d/yy'}}
+          | Completed on: {{ task.completed_at }}
       .task-controls.col-xs-2
         .edit.icon-button ng-click="toggleXEditMode(taskDescriptionForm)" title="Edit Task"
           span.glyphicon.glyphicon-pencil

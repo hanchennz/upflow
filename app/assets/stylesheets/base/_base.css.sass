@@ -35,22 +35,22 @@ body
 =color($color, $darkcolor)
   background-color: #{$color}
 
-  div.task-content, div.expand-icon
+  .task-content, .expand-icon
     @include transition(0.3s)
     background-color: #{$darkcolor}
 
-  div.icon-button
+  .icon-button
     @include transition(0.3s)
 
     &:hover
-      @include transition(0.3s)
       background-color: #{$color}
 
-  div.expand-icon
-    &.hover
-      @include transition(0.3s)
-      background-color: #{$color}
-      box-shadow: 0px 0px 2px -1px black
+  .header
+    &:hover
+      .expand-icon
+        @include transition(0.3s)
+        background-color: #{$color}
+        box-shadow: 0px 0px 2px -1px black
 
 div.blue
   @include color($blue, $darker-blue)
@@ -98,16 +98,6 @@ textarea
   border-radius: 0.3rem
   min-height: 8rem
   resize: vertical
-
-.glyphicon
-  font-size: 1.5rem
-  color: grey
-  padding-left: 0.6rem
-
-  &:hover
-    color: black
-    cursor: pointer
-    transition: .1s linear
 
 .vertical-parent:before
   content: ''

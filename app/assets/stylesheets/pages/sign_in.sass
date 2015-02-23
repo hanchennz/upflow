@@ -78,11 +78,10 @@
         margin: 0 0 0.4rem 0
         padding: 0.5rem
         border-bottom: 1px solid transparent
-        transition: .5s linear
         text-align: center
+        @include transition(.5s)
 
         &:focus
-          transition: .5s linear
           border-bottom: 1px solid lightgrey
           box-shadow: none
           outline: none

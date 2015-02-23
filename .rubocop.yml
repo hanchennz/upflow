@@ -17,6 +17,9 @@ ClassAndModuleChildren:
 ClassLength:
   Enabled: false
 
+ClassVars:
+  Enabled: false
+
 CollectionMethods:
   PreferredMethods:
     collect!: map!

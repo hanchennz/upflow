@@ -10,7 +10,7 @@
 
   #tasks, #check-ins
     top: 7%
-    max-height: 93%
+    height: 93%
     padding: 1rem
 
   #tasks
@@ -93,7 +93,7 @@
 
       .chosen-drop
         margin-bottom: 1px
-        top: -66px
+        top: -73px
 
       .chosen-with-drop .chosen-single
         border-radius: 0
@@ -101,7 +101,7 @@
       .chosen-results
         margin-bottom: 0
         margin-top: 4px
-        max-height: 63px
+        max-height: 70px
 
   .glyphicon
     color: white
@@ -113,32 +113,6 @@
 
   .icon-button
     cursor: pointer
-
-  .editable-wrap,
-  .editable-controls,
-  .editable-input
-    width: 100%
-    border-radius: 0rem
-
-  .editable-buttons
-    display: inline-block
-    vertical-align: bottom
-    bottom: 0
-    position: absolute
-    right: 15px
-
-    .glyphicon
-      height: 3rem
-      top: 0
-      margin-top: 0
-
-    .btn-primary, .btn-default
-      height: 3rem
-      padding: 6px 8px
-      margin: 0
-
-    .btn-default
-      background: gray
 
 .check-in
   background: white
@@ -153,11 +127,6 @@
     padding: 0.8rem 0 0.7rem 0
     margin: 0
 
-  .editable-wrap,
-  .editable-controls,
-  .editable-input
-    width: 100%
-
   .reduced-content
     padding-top: 0.5rem
 
@@ -165,9 +134,9 @@
     padding-top: 0.5rem
     margin-bottom: 0.4rem
     border-bottom: 1px solid transparent
-    transition: .5s linear
+    @include transition(.5s)
+
     &:focus
-      transition: .5s linear
       border-bottom: 1px solid lightgrey
 
   .date
@@ -185,10 +154,47 @@
     padding: 0
 
   .glyphicon
+    font-size: 1.5rem
+    color: grey
     float: right
+    padding-left: 0.6rem
+    @include transition(.1s)
+
+    &:hover
+      color: black
+      cursor: pointer
 
 #no-task-message
   padding: 1rem 1rem
   text-align: center
   min-height: 0
   font-size: 2rem
+
+.check-in, .task
+  .editable-wrap,
+  .editable-controls,
+  .editable-input
+    width: 100%
+    border-radius: 0rem
+
+  .editable-buttons
+    display: inline-block
+    vertical-align: bottom
+    bottom: 0
+    position: absolute
+    right: 15px
+
+    .glyphicon
+      color: white
+      height: 3rem
+      margin-top: 0
+      padding: 0
+      top: 0
+
+    .btn-primary, .btn-default
+      height: 3rem
+      padding: 6px 8px
+      margin: 0
+
+    .btn-default
+      background: gray

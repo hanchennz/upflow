@@ -3,22 +3,24 @@
     .col-md-2.col-xs-6
       a href="#" upFlow
     .col-md-9.col-xs-4
+      a
+        | {{ super }}
     .col-md-1.col-xs-2.align-right
       a href="/users/sign_out" target="_self" Logout
   #tasks.col-md-4
-    div.task-animate ng-repeat="task in taskList | orderBy:['rank', 'repeat_by']" ng-click="toggleDisplay(task)"
+    div.task-animate id="task-{{ task.id }}" ng-repeat="task in taskList | orderBy:['rank', 'repeat_by']" ng-click="toggleDisplay(task)"
       up-task delete-task="deleteTask" displayed-task="displayedTask" repeat-by-options="repeatByOptions" task="task" 
   #check-ins.col-md-8
     .check-in
       form#new-task ng-submit="saveTask(newTask)" ng-if="search.task_id == undefined"
         div.row
           div.col-xs-12
-            input.task-input placeholder="Create new task..." ng-model="newTask.name" required="" maxlength="50"
+            input.task-input#new-task-name placeholder="Create new task..." ng-model="newTask.name" required="" maxlength="50"
         div.row
           div.col-md-12
-            textarea.non-x-edit placeholder="What do you want to get done?" ng-model="newTask.description" maxlength="2000"
+            textarea.non-x-edit#new-task-description placeholder="What do you want to get done?" ng-model="newTask.description" maxlength="2000"
         div.row
-          div.col-xs-10.repeat-by
+          div.col-xs-10.repeat-by#new-task-repeat-by
             ' Remind me every:
             select.chosen-select chosen="" disable-search="true" ng-options="option.value as option.name for option in repeatByOptions" ng-model="newTask.repeat_by"
           div.col-xs-2
@@ -30,10 +32,10 @@
               | {{newCheckIn.task_name}}
         div.row
           div.col-md-12
-            textarea.non-x-edit ng-model="newCheckIn.note" placeholder="What did you do today?" maxlength="2000" required=""
+            textarea.non-x-edit#new-check-in-note ng-model="newCheckIn.note" placeholder="What did you do today?" maxlength="2000" required=""
           div.col-md-12
             button.btn.btn-success.pull-right type="submit" Check In
-    up-check-in.check-in-animate check-in="checkIn" delete-check-in="deleteCheckIn" ng-repeat="checkIn in filteredCheckInList = (checkInList | filter:search)"
+    up-check-in.check-in-animate id="check-in-{{ checkIn.id }}" check-in="checkIn" delete-check-in="deleteCheckIn" ng-repeat="checkIn in filteredCheckInList = (checkInList | filter:search)"
     #no-task-message.check-in.row ng-show="!taskList.length && !loading"
       span
         | You currently do not have any tasks. Add one above!

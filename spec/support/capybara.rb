@@ -12,6 +12,7 @@ Capybara.register_driver :poltergeist do |app|
 end
 
 Capybara.javascript_driver = :poltergeist
+Capybara::Screenshot.prune_strategy = { keep: 20 }
 
 RSpec.configure do |config|
   config.include Capybara::Angular::DSL, type: :feature

@@ -1,6 +1,6 @@
 class Api::UsersController < ApplicationController
   def current
-    @user = current_user
+    @user = User.find(current_user)
     render 'show'
   end
 end

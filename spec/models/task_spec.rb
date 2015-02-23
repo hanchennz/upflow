@@ -69,7 +69,7 @@ describe Task do
           { color: 'red', rank: 0, repeat_by: 0 }
         ]
 
-        for color in colors
+        colors.each do |color|
           @task.update_attributes(repeat_by: color[:repeat_by])
           @task.reload
           expect(@task.color).to eq(color[:color])
