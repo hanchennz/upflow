@@ -40,13 +40,21 @@ upflow.controller 'HomeController', ($scope, $timeout, CheckIn, Session, Task) -
       task_type: 'one_off'
       user_id: $scope.currentUser.id
 
-  updateLastCheckIn = (task_id) ->
-    _.findWhere($scope.taskList, {id: task_id}).last_check_in = new Date()
+  updateTaskAfterCheckIn = (task_id) ->
+    Task.get { id: task_id }
+    , (success) ->
+      task = _.findWhere($scope.taskList, {id: task_id})
+      _(task).extend({
+        color: success.color
+        next_due_date: success.next_due_date
+        rank: success.rank
+      })
 
   $scope.deleteCheckIn = (checkIn) ->
     CheckIn.delete { id: checkIn.id }
     , (success) ->
       $scope.checkInList = _.without($scope.checkInList, checkIn)
+      updateTaskAfterCheckIn(checkIn.task_id)
 
   $scope.deleteTask = (task) ->
     Task.delete { id: task.id }
@@ -59,7 +67,7 @@ upflow.controller 'HomeController', ($scope, $timeout, CheckIn, Session, Task) -
       user_id: $scope.currentUser.id
     , (savedCheckIn) ->
       $scope.checkInList.unshift(savedCheckIn)
-      updateLastCheckIn(savedCheckIn.task_id)
+      updateTaskAfterCheckIn(savedCheckIn.task_id)
       addNewCheckInForTask({ id: newCheckIn.task_id, name: newCheckIn.task_name })
 
   $scope.saveTask = (task) ->
