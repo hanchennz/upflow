@@ -1,8 +1,6 @@
 upflow.controller 'HomeController', ($scope, $timeout, CheckIn, Session, Task) ->
   $scope.loading = true
 
-  $scope.super = "HELLO WORLD"
-
   Session.getUser (user) ->
     $scope.currentUser = user
     $scope.taskList = Task.index
